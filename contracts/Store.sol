@@ -24,6 +24,6 @@ contract Store is ERC721, Ownable {
     function purchaseProduct(uint256 _tokenId) public payable {
         Product memory _item = tokenIdToProducts[_tokenId];
         require(msg.value == _item.price, "price doesn't match");
-        transferFrom(_item.seller, msg.sender, _tokenId);
+        _transfer(_item.seller, msg.sender, _tokenId);
     }
 }
