@@ -6,6 +6,7 @@ const { anyValue } = require("@nomicfoundation/hardhat-chai-matchers/withArgs");
 const { expect } = require("chai");
 
 describe("Store", function () {
+  let store, owner, otherAccount;
   // We define a fixture to reuse the same setup in every test.
   // We use loadFixture to run this setup once, snapshot that state,
   // and reset Hardhat Network to that snapshot in every test.
@@ -16,15 +17,29 @@ describe("Store", function () {
     const Store = await ethers.getContractFactory("Store");
     const store = await Store.deploy("SampleStore", "TEST");
 
-    return { store, owner, otherAccount };
+    return [ store, owner, otherAccount ];
   }
+
+  beforeEach(async function () {
+    [store, owner, otherAccount] = await loadFixture(deployStore);
+  });
 
   
   describe("Deployment", function () {
     it("Should set the right owner", async function () {
-      const { store, owner } = await loadFixture(deployStore);
-
       expect(await store.owner()).to.equal(owner.address);
+    });
+  });
+
+  describe("List Item", function () {
+    it("Should allow the owner to list new items for sale", async function () {
+      await store.listProductForSale(owner.address, 1, "Product 1", ethers.utils.parseEther('1'));
+      expect(await store.ownerOf(1)).to.equal(owner.address);
+    });
+
+    it("Should not allow anyone other than the owner to list new items for sale", async function () {
+      await expect(store.connect(otherAccount).listProductForSale(otherAccount.address, 1, 'Product 1', ethers.utils.parseEther('1')))
+        .to.be.revertedWith('Ownable: caller is not the owner');
     });
   });
 });
