@@ -1,8 +1,4 @@
-const {
-  time,
-  loadFixture,
-} = require("@nomicfoundation/hardhat-network-helpers");
-const { anyValue } = require("@nomicfoundation/hardhat-chai-matchers/withArgs");
+const { loadFixture } = require("@nomicfoundation/hardhat-network-helpers");
 const { expect } = require("chai");
 
 describe("Store", function () {
@@ -17,14 +13,13 @@ describe("Store", function () {
     const Store = await ethers.getContractFactory("Store");
     const store = await Store.deploy("SampleStore", "TEST");
 
-    return [ store, owner, otherAccount ];
+    return [store, owner, otherAccount];
   }
 
   beforeEach(async function () {
     [store, owner, otherAccount] = await loadFixture(deployStore);
   });
 
-  
   describe("Deployment", function () {
     it("Should set the right owner", async function () {
       expect(await store.owner()).to.equal(owner.address);
@@ -33,29 +28,52 @@ describe("Store", function () {
 
   describe("List Product For Sale", function () {
     it("Should allow the owner to list products for sale", async function () {
-      await store.listProductForSale(owner.address, 1, "Product 1", ethers.utils.parseEther('1'));
+      await store.listProductForSale(
+        owner.address,
+        1,
+        "Product 1",
+        ethers.utils.parseEther("1")
+      );
       expect(await store.ownerOf(1)).to.equal(owner.address);
     });
 
     it("Should not allow anyone other than the owner to list products for sale", async function () {
-      await expect(store.connect(otherAccount).listProductForSale(otherAccount.address, 1, 'Product 1', ethers.utils.parseEther('1')))
-        .to.be.revertedWith('Ownable: caller is not the owner');
+      await expect(
+        store
+          .connect(otherAccount)
+          .listProductForSale(
+            otherAccount.address,
+            1,
+            "Product 1",
+            ethers.utils.parseEther("1")
+          )
+      ).to.be.revertedWith("Ownable: caller is not the owner");
     });
   });
 
   describe("Purchase Products", function () {
     beforeEach(async function () {
-      await store.listProductForSale(owner.address, 1, 'Product 1', ethers.utils.parseEther('2'));
+      await store.listProductForSale(
+        owner.address,
+        1,
+        "Product 1",
+        ethers.utils.parseEther("2")
+      );
     });
 
-    it('Should allow a user to purchase a product', async function () {
-      await store.connect(otherAccount).purchaseProduct(1, { value: ethers.utils.parseEther('2') });
+    it("Should allow a user to purchase a product", async function () {
+      await store
+        .connect(otherAccount)
+        .purchaseProduct(1, { value: ethers.utils.parseEther("2") });
       expect(await store.ownerOf(1)).to.equal(otherAccount.address);
     });
 
-    it('Should not allow a user to purchase a product with incorrect payment', async function () {
-      await expect(store.connect(otherAccount).purchaseProduct(1, { value: ethers.utils.parseEther('1') }))
-        .to.be.revertedWith('price doesn\'t match');
+    it("Should not allow a user to purchase a product with incorrect payment", async function () {
+      await expect(
+        store
+          .connect(otherAccount)
+          .purchaseProduct(1, { value: ethers.utils.parseEther("1") })
+      ).to.be.revertedWith("price doesn't match");
     });
   });
 });
