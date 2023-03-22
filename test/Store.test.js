@@ -31,13 +31,13 @@ describe("Store", function () {
     });
   });
 
-  describe("List Item", function () {
-    it("Should allow the owner to list new items for sale", async function () {
+  describe("List Product For Sale", function () {
+    it("Should allow the owner to list products for sale", async function () {
       await store.listProductForSale(owner.address, 1, "Product 1", ethers.utils.parseEther('1'));
       expect(await store.ownerOf(1)).to.equal(owner.address);
     });
 
-    it("Should not allow anyone other than the owner to list new items for sale", async function () {
+    it("Should not allow anyone other than the owner to list products for sale", async function () {
       await expect(store.connect(otherAccount).listProductForSale(otherAccount.address, 1, 'Product 1', ethers.utils.parseEther('1')))
         .to.be.revertedWith('Ownable: caller is not the owner');
     });
