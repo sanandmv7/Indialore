@@ -6,9 +6,9 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract IndialoreMarketplace {
     using Strings for uint256;
-    mapping(address=>bool) isSeller;
+    mapping(address=>bool) public isSeller;
 
-    mapping(address=>Store) sellerToStore;
+    mapping(address=>Store) public sellerToStore;
 
     uint256 currentStoreId = 0;
 
