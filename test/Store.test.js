@@ -10,6 +10,9 @@ describe("Store", function () {
     // Contracts are deployed using the first signer/account by default
     const [owner, otherAccount] = await ethers.getSigners();
 
+    const Token = await ethers.getContractFactory("IndialorePaymentToken");
+    const token = await Token.deploy();
+
     const Store = await ethers.getContractFactory("Store");
     const store = await Store.deploy("SampleStore", "TEST");
 

@@ -3,6 +3,8 @@ pragma solidity ^0.8.16;
 
 // Importing the Store contract
 import "./Store.sol";
+// Importing the IndialorePaymentToken contract
+import "./IndialorePaymentToken";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 // Contract "IndialoreMarketplace"
@@ -19,10 +21,21 @@ contract IndialoreMarketplace {
     // Counter to keep track of the number of stores created
     uint256 currentStoreId = 0;
 
+    // Payment token contract
+    IndialorePaymentToken public immutable paymentToken;
+
+    // Address of the escrow contract
+    address public immutable escrow;
+
     // Modifier to restrict access to functions to only sellers
     modifier onlySellers() {
         require(isSeller[msg.sender], "caller is not a seller");
         _;
+    }
+
+    constructor(address _escrow) {
+        paymentToken = new IndialorePaymentToken();
+        escrow = _escrow;
     }
 
     // Function to register a seller
@@ -41,7 +54,7 @@ contract IndialoreMarketplace {
         // Generate a unique store ID based on the current store ID counter
         string memory _storeId = string.concat("IL", currentStoreId.toString());
         // Create a new Store contract with the given name and store ID
-        Store store = new Store(_storeName, _storeId);
+        Store store = new Store(_storeName, _storeId, paymentToken, escrow);
         // Associate the new Store contract with the seller's address
         sellerToStore[msg.sender] = store;
         // Increment the store ID counter

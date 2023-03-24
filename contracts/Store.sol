@@ -1,12 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.16;
 
-// Importing the ERC721 and Ownable contracts from OpenZeppelin
+// Importing the ERC721, Ownable, IERC20 and SafeERC20 contracts from OpenZeppelin
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 // Contract "Store" inherits from ERC721 and Ownable
 contract Store is ERC721, Ownable {
+    using SafeERC20 for IERC20;
     // "Product" struct to represent a product for sale
     struct Product {
         string name; // Name of the product
@@ -17,11 +20,22 @@ contract Store is ERC721, Ownable {
     // Mapping from token IDs to the products they represent
     mapping(uint256 => Product) tokenIdToProducts;
 
+    // Address of the payment token
+    address public immutable paymentToken;
+
+    // Address of the escrow contract
+    address public immutable escrow;
+
     // Constructor takes in a store name and ID and passes them to the ERC721 constructor
     constructor(
         string memory _storeName,
-        string memory _storeId
-    ) ERC721(_storeName, _storeId) {}
+        string memory _storeId,
+        address _paymentToken,
+        address _escrow
+    ) ERC721(_storeName, _storeId) {
+        paymentToken = _paymentToken;
+        escrow = _escrow;
+    }
 
     // Function that allows the contract owner to list a new product for sale
     function listProductForSale(
@@ -38,12 +52,12 @@ contract Store is ERC721, Ownable {
         _safeMint(_to, _tokenId);
     }
 
-    // Function that allows a user to purchase a product with the given token ID by sending the required amount of Ether
-    function purchaseProduct(uint256 _tokenId) public payable {
+    // Function that allows a user to purchase a product with the given token ID using required amount of paymentToken
+    function purchaseProduct(uint256 _tokenId) public {
         // Retrieve the product associated with the given token ID
         Product memory _item = tokenIdToProducts[_tokenId];
-        // Check that the amount of Ether sent by the buyer matches the price of the product
-        require(msg.value == _item.price, "price doesn't match");
+        // Transfer the payment to escrow
+        IERC20(paymentToken).safeTransferFrom(msg.sender, escrow, _item.price);
         // Transfer ownership of the ERC721 token from the seller to the buyer
         _transfer(_item.seller, msg.sender, _tokenId);
     }
