@@ -4,17 +4,8 @@ pragma solidity ^0.8.16;
 // Importing the ERC721, Ownable contracts from OpenZeppelin
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-
-interface Escrow {
-    function enterEscrow(
-        string memory _storeId,
-        uint256 _productId,
-        uint256 _amount,
-        uint256 _deadline,
-        address _buyer,
-        address _seller
-    ) external;
-}
+// Importing the Escrow contract
+import "./Escrow.sol";
 
 // Contract "Store" inherits from ERC721 and Ownable
 contract Store is ERC721, Ownable {
@@ -38,10 +29,8 @@ contract Store is ERC721, Ownable {
     constructor(
         string memory _storeName,
         string memory _storeId,
-        address _paymentToken,
         address _escrow
     ) ERC721(_storeName, _storeId) {
-        paymentToken = _paymentToken;
         escrow = _escrow;
     }
 

@@ -11,7 +11,7 @@ contract Escrow {
     uint256 currentEscrowId;
 
     struct EscrowDetails {
-        string memory storeId;
+        string storeId;
         uint256 productId;
         uint256 amount;
         uint256 deadline;
@@ -38,7 +38,7 @@ contract Escrow {
         address _buyer,
         address _seller
     ) external {
-        EscrowDetails _escrowDetails = new EscrowDetails(
+        EscrowDetails memory _escrowDetails = EscrowDetails(
             _storeId,
             _productId,
             _amount,
@@ -53,7 +53,7 @@ contract Escrow {
     }
 
     function confirmDelivery(uint256 _escrowId) external {
-        EscrowDetails _escrowDetails = escrowDetails[_escrowId];
+        EscrowDetails memory _escrowDetails = escrowDetails[_escrowId];
         require(msg.sender == _escrowDetails.buyer, "Caller is not the buyer of the product");
         require(!_escrowDetails.deliveryConfirmed, "Delivery already confirmed");
         escrowDetails[_escrowId].deliveryConfirmed = true;
@@ -61,7 +61,7 @@ contract Escrow {
     }
 
     function releaseEscrowToSellerPostDeadline(uint256 _escrowId) external {
-        EscrowDetails _escrowDetails = escrowDetails[_escrowId];
+        EscrowDetails memory _escrowDetails = escrowDetails[_escrowId];
         require(block.timestamp > _escrowDetails.deadline, "Deadline not reached yet");
         require(!_escrowDetails.deliveryConfirmed, "Delivery already confirmed");
         escrowDetails[_escrowId].deliveryConfirmed = true;

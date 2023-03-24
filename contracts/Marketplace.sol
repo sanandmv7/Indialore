@@ -5,8 +5,7 @@ pragma solidity ^0.8.16;
 import "./Store.sol";
 // Importing the IndialorePaymentToken contract
 import "./IndialorePaymentToken.sol";
-// Importing the Escrow contract
-import "./Escrow.sol";
+// Importing Strings from OpenZeppelin
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 // Contract "IndialoreMarketplace"
@@ -56,7 +55,7 @@ contract IndialoreMarketplace {
         // Generate a unique store ID based on the current store ID counter
         string memory _storeId = string.concat("IL", currentStoreId.toString());
         // Create a new Store contract with the given name and store ID
-        Store store = new Store(_storeName, _storeId, paymentToken, escrow);
+        Store store = new Store(_storeName, _storeId, address(escrow));
         // Associate the new Store contract with the seller's address
         sellerToStore[msg.sender] = store;
         // Increment the store ID counter
