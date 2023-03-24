@@ -6,10 +6,13 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 contract Escrow {
+    // Using SafeERC20 for IERC20 to safely handle ERC20 tokens
     using SafeERC20 for IERC20;
 
+    // Counter to keep track of current escrow Id
     uint256 currentEscrowId;
 
+    // Struct to keep track of Escrow details
     struct EscrowDetails {
         string storeId;
         uint256 productId;
@@ -20,16 +23,18 @@ contract Escrow {
         bool deliveryConfirmed;
     }
 
-    // EscrowId => Details
+    // Mapping to keep track of Escrow details for each Escrow Id
     mapping(uint256 => EscrowDetails) escrowDetails;
 
     // Address of the payment token
     address public immutable paymentToken;
 
+    // Constructor sets the payment token
     constructor(address _paymentToken) {
         paymentToken = _paymentToken;
     }
 
+    // Function to create a new Escrow
     function enterEscrow(
         string memory _storeId,
         uint256 _productId,
@@ -38,6 +43,7 @@ contract Escrow {
         address _buyer,
         address _seller
     ) external {
+        // Create a new Escrow with given details
         EscrowDetails memory _escrowDetails = EscrowDetails(
             _storeId,
             _productId,
@@ -47,24 +53,55 @@ contract Escrow {
             _seller,
             false
         );
+        // Assign Escrow details to the new Escrow Id
         escrowDetails[currentEscrowId++] = _escrowDetails;
         // Transfer the payment to escrow
         IERC20(paymentToken).safeTransferFrom(_buyer, address(this), _amount);
     }
 
+    // Function to confirm delivery by the buyer
     function confirmDelivery(uint256 _escrowId) external {
+        // Get Escrow details using Escrow Id
         EscrowDetails memory _escrowDetails = escrowDetails[_escrowId];
-        require(msg.sender == _escrowDetails.buyer, "Caller is not the buyer of the product");
-        require(!_escrowDetails.deliveryConfirmed, "Delivery already confirmed");
+        // Check if caller is the buyer of the product
+        require(
+            msg.sender == _escrowDetails.buyer,
+            "Caller is not the buyer of the product"
+        );
+        // Check if delivery is not already confirmed
+        require(
+            !_escrowDetails.deliveryConfirmed,
+            "Delivery already confirmed"
+        );
+        // Mark delivery as confirmed
         escrowDetails[_escrowId].deliveryConfirmed = true;
-        IERC20(paymentToken).safeTransfer(_escrowDetails.seller, _escrowDetails.amount);
+        // Transfer payment to the seller
+        IERC20(paymentToken).safeTransfer(
+            _escrowDetails.seller,
+            _escrowDetails.amount
+        );
     }
 
+    // Function to release Escrow to the seller after deadline
     function releaseEscrowToSellerPostDeadline(uint256 _escrowId) external {
+        // Get Escrow details using Escrow Id
         EscrowDetails memory _escrowDetails = escrowDetails[_escrowId];
-        require(block.timestamp > _escrowDetails.deadline, "Deadline not reached yet");
-        require(!_escrowDetails.deliveryConfirmed, "Delivery already confirmed");
+        // Check if deadline has been reached
+        require(
+            block.timestamp > _escrowDetails.deadline,
+            "Deadline not reached yet"
+        );
+        // Check if delivery is not already confirmed
+        require(
+            !_escrowDetails.deliveryConfirmed,
+            "Delivery already confirmed"
+        );
+        // Mark delivery as confirmed
         escrowDetails[_escrowId].deliveryConfirmed = true;
-        IERC20(paymentToken).safeTransfer(_escrowDetails.seller, _escrowDetails.amount);
+        // Transfer payment to the seller
+        IERC20(paymentToken).safeTransfer(
+            _escrowDetails.seller,
+            _escrowDetails.amount
+        );
     }
 }

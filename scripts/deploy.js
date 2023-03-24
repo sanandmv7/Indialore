@@ -7,14 +7,14 @@
 const hre = require("hardhat");
 
 async function main() {
-  const Marketplace = await hre.ethers.getContractFactory("IndialoreMarketplace");
+  const Marketplace = await hre.ethers.getContractFactory(
+    "IndialoreMarketplace"
+  );
   const marketplace = await Marketplace.deploy();
 
   await marketplace.deployed();
 
-  console.log(
-    `Marketplace deployed to ${marketplace.address}`
-  );
+  console.log(`Marketplace deployed to ${marketplace.address}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
