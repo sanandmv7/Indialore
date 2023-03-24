@@ -2,7 +2,7 @@ const { loadFixture } = require("@nomicfoundation/hardhat-network-helpers");
 const { expect } = require("chai");
 
 describe("Store", function () {
-  let store, owner, otherAccount;
+  let store, token, escrow, owner, otherAccount;
   // We define a fixture to reuse the same setup in every test.
   // We use loadFixture to run this setup once, snapshot that state,
   // and reset Hardhat Network to that snapshot in every test.
@@ -19,18 +19,17 @@ describe("Store", function () {
     const Store = await ethers.getContractFactory("Store");
     const store = await Store.deploy("SampleStore", "TEST", escrow.address);
 
-    token.mint(otherAccount, ethers.utils.parseEther("100"));
-    token.connect(otherAccount).approve(escrow.address, ethers.utils.parseEther("100"));
-
-    return [store, owner, otherAccount];
+    return [token, escrow, store, owner, otherAccount];
   }
 
   beforeEach(async function () {
-    [store, owner, otherAccount] = await loadFixture(deployStore);
+    [token, escrow, store, owner, otherAccount] = await loadFixture(
+      deployStore
+    );
   });
 
   describe("Deployment", function () {
-    it("Should set the right owner", async function () {
+    it("Should set the correct owner", async function () {
       expect(await store.owner()).to.equal(owner.address);
     });
   });
@@ -70,18 +69,18 @@ describe("Store", function () {
       );
     });
 
-    xit("Should allow a user to purchase a product", async function () {
-      await store
+    it("Should allow a user to purchase a product", async function () {
+      await token.mint(otherAccount.address, ethers.utils.parseEther("100"));
+      await token
         .connect(otherAccount)
-        .purchaseProduct(1);
+        .approve(escrow.address, ethers.utils.parseEther("100"));
+      await store.connect(otherAccount).purchaseProduct(1);
       expect(await store.ownerOf(1)).to.equal(otherAccount.address);
     });
 
     it("Should not allow a user to purchase a product with incorrect id", async function () {
       await expect(
-        store
-          .connect(otherAccount)
-          .purchaseProduct(2)
+        store.connect(otherAccount).purchaseProduct(2)
       ).to.be.revertedWith("Product does not exist");
     });
   });

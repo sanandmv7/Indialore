@@ -32,6 +32,7 @@ contract Store is ERC721, Ownable {
         address _escrow
     ) ERC721(_storeName, _storeId) {
         escrow = _escrow;
+        transferOwnership(tx.origin);
     }
 
     // Function that allows the contract owner to list a new product for sale
