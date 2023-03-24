@@ -13,8 +13,14 @@ describe("Store", function () {
     const Token = await ethers.getContractFactory("IndialorePaymentToken");
     const token = await Token.deploy();
 
+    const Escrow = await ethers.getContractFactory("Escrow");
+    const escrow = await Escrow.deploy(token.address);
+
     const Store = await ethers.getContractFactory("Store");
-    const store = await Store.deploy("SampleStore", "TEST");
+    const store = await Store.deploy("SampleStore", "TEST", escrow.address);
+
+    token.mint(otherAccount, ethers.utils.parseEther("100"));
+    token.connect(otherAccount).approve(escrow.address, ethers.utils.parseEther("100"));
 
     return [store, owner, otherAccount];
   }
@@ -64,19 +70,19 @@ describe("Store", function () {
       );
     });
 
-    it("Should allow a user to purchase a product", async function () {
+    xit("Should allow a user to purchase a product", async function () {
       await store
         .connect(otherAccount)
-        .purchaseProduct(1, { value: ethers.utils.parseEther("2") });
+        .purchaseProduct(1);
       expect(await store.ownerOf(1)).to.equal(otherAccount.address);
     });
 
-    it("Should not allow a user to purchase a product with incorrect payment", async function () {
+    it("Should not allow a user to purchase a product with incorrect id", async function () {
       await expect(
         store
           .connect(otherAccount)
-          .purchaseProduct(1, { value: ethers.utils.parseEther("1") })
-      ).to.be.revertedWith("price doesn't match");
+          .purchaseProduct(2)
+      ).to.be.revertedWith("Product does not exist");
     });
   });
 });

@@ -51,6 +51,7 @@ contract Store is ERC721, Ownable {
 
     // Function that allows a user to purchase a product with the given token ID using required amount of paymentToken
     function purchaseProduct(uint256 _tokenId) public {
+        require(_exists(_tokenId), "Product does not exist");
         // Retrieve the product associated with the given token ID
         Product memory _item = tokenIdToProducts[_tokenId];
         // Calculate escrow deadline
