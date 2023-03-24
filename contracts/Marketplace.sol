@@ -4,7 +4,9 @@ pragma solidity ^0.8.16;
 // Importing the Store contract
 import "./Store.sol";
 // Importing the IndialorePaymentToken contract
-import "./IndialorePaymentToken";
+import "./IndialorePaymentToken.sol";
+// Importing the Escrow contract
+import "./Escrow.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 // Contract "IndialoreMarketplace"
@@ -24,8 +26,8 @@ contract IndialoreMarketplace {
     // Payment token contract
     IndialorePaymentToken public immutable paymentToken;
 
-    // Address of the escrow contract
-    address public immutable escrow;
+    // Escrow contract
+    Escrow public immutable escrow;
 
     // Modifier to restrict access to functions to only sellers
     modifier onlySellers() {
@@ -33,9 +35,9 @@ contract IndialoreMarketplace {
         _;
     }
 
-    constructor(address _escrow) {
+    constructor() {
         paymentToken = new IndialorePaymentToken();
-        escrow = _escrow;
+        escrow = new Escrow(address(paymentToken));
     }
 
     // Function to register a seller

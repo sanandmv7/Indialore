@@ -1,15 +1,23 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.16;
 
-// Importing the ERC721, Ownable, IERC20 and SafeERC20 contracts from OpenZeppelin
+// Importing the ERC721, Ownable contracts from OpenZeppelin
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+
+interface Escrow {
+    function enterEscrow(
+        string memory _storeId,
+        uint256 _productId,
+        uint256 _amount,
+        uint256 _deadline,
+        address _buyer,
+        address _seller
+    ) external;
+}
 
 // Contract "Store" inherits from ERC721 and Ownable
 contract Store is ERC721, Ownable {
-    using SafeERC20 for IERC20;
     // "Product" struct to represent a product for sale
     struct Product {
         string name; // Name of the product
@@ -17,14 +25,14 @@ contract Store is ERC721, Ownable {
         address seller; // Address of the seller who listed the product for sale
     }
 
+    // Length of escrow post which escrow will be realeased to seller if buyer doesn't confirm delivery
+    uint256 ESCROW_LENGTH = 24 weeks;
+
     // Mapping from token IDs to the products they represent
     mapping(uint256 => Product) tokenIdToProducts;
 
-    // Address of the payment token
-    address public immutable paymentToken;
-
     // Address of the escrow contract
-    address public immutable escrow;
+    address immutable escrow;
 
     // Constructor takes in a store name and ID and passes them to the ERC721 constructor
     constructor(
@@ -56,8 +64,17 @@ contract Store is ERC721, Ownable {
     function purchaseProduct(uint256 _tokenId) public {
         // Retrieve the product associated with the given token ID
         Product memory _item = tokenIdToProducts[_tokenId];
-        // Transfer the payment to escrow
-        IERC20(paymentToken).safeTransferFrom(msg.sender, escrow, _item.price);
+        // Calculate escrow deadline
+        uint256 _escrowDeadline = block.timestamp + ESCROW_LENGTH; 
+        // Enter escrow
+        Escrow(escrow).enterEscrow(
+            symbol(),
+            _tokenId,
+            _item.price,
+            _escrowDeadline,
+            msg.sender,
+            _item.seller
+        );
         // Transfer ownership of the ERC721 token from the seller to the buyer
         _transfer(_item.seller, msg.sender, _tokenId);
     }
