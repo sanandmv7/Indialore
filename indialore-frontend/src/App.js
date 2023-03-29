@@ -1,11 +1,21 @@
 import React from 'react';
 
-import Home from './Pages/Home';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import HomePage from './Pages/HomePage';
+import SignUpPage from './Pages/SignUpPage';
 
 function App() {
   return (
     <div>
-      <Home />
+      <Router>
+        <Route exact path="/">
+        <HomePage />
+        </Route>
+        <Route path="/signup">
+        <SignUpPage />
+        </Route>
+      </Router>
+      
     </div>
   );
 }
