@@ -11,3 +11,6 @@ REPORT_GAS=true npx hardhat test
 npx hardhat node
 npx hardhat run scripts/deploy.js
 ```
+
+# How to run the frontend
+Please refer indialore-frontend/README.md for frontend specific instructions 

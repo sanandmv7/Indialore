@@ -4,11 +4,11 @@ import SignUp from "../Components/SignUp/SignUp";
 import Login from "../Components/Login/Login";
 import logo from '../assets/image0.png';
 
-import './SignUpPage.css';
+import './LoginPage.css';
 
-function SignUpPage(props) {
+function LoginPage(props) {
   return (
-    <div className="signUpParentDiv">
+    <div className="loginParentDiv">
       <div className="wrapper">
         <div className="title-text">
           <div className="title login">
@@ -41,4 +41,4 @@ function SignUpPage(props) {
   );
 }
 
-export default SignUpPage;
+export default LoginPage;
