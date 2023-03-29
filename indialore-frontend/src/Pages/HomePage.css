@@ -103,7 +103,7 @@ body {
 
 .explore-by-state-section {
   font-size: 1em;
-  width: 85%;
+  width: 79%;
   margin-left: 8%;
   display: flexbox;
   background: rgba(33, 33, 33, 0.9);
@@ -111,8 +111,11 @@ body {
   font-family: "Courier New", Courier, monospace;
   position: absolute;
   text-shadow: 0.1em 0.1em 0.05em #333;
-  margin-top: 10px;
+  margin: 0 auto;
+  margin-left: 10%;
   padding-left: 33%;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .explore-by-state-section .waviy {
@@ -125,11 +128,11 @@ body {
 .flip-container {
   display: flex;
   flex-direction: row;
-  max-width: 85%;
+  max-width: 79%;
   flex-wrap: wrap;
   margin: 0 auto;
-  margin-left: 8%;
-  margin-top: 2.5%;
+  margin-left: 10%;
+  margin-top: 3%;
 }
 
 .flipper, .front,

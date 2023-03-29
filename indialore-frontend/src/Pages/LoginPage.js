@@ -2,9 +2,9 @@ import React from "react";
 
 import SignUp from "../Components/SignUp/SignUp";
 import Login from "../Components/Login/Login";
-import logo from '../assets/image0.png';
+import logo from "../assets/image0.png";
 
-import './LoginPage.css';
+import "./LoginPage.css";
 
 function LoginPage(props) {
   return (
@@ -18,23 +18,16 @@ function LoginPage(props) {
         </div>
 
         <div className="form-container">
-          <div className="slide-controls">
-            <input type="radio" name="slider" id="login" />
-            <input type="radio" name="slider" id="signup" defaultChecked />
-            <label htmlFor="login" className="slide login">
-              {" "}
-              Login
-            </label>
-            <label htmlFor="signup" className="slide signup">
-              {" "}
-              Signup
-            </label>
-            <div className="slide-tab"></div>
-          </div>
-          <div className="form-inner">
-            <Login />
-            <SignUp />
-          </div>
+          <label htmlFor="login" className="slide login">
+            {" "}
+            Login
+          </label>
+        </div>
+        <div className="form-inner">
+          <Login />
+        </div>
+        <div className="form-inner">
+          <SignUp />
         </div>
       </div>
     </div>

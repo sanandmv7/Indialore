@@ -2,7 +2,7 @@ import React from "react";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-// import LoginPage from './Pages/LoginPage';
+import LoginPage from './Pages/LoginPage';
 import HomePage from "./Pages/HomePage";
 
 function App() {
@@ -12,9 +12,9 @@ function App() {
         <Route exact path="/">
           <HomePage />
         </Route>
-        {/* <Route path="/login">
+        <Route path="/login">
         <LoginPage />
-        </Route> */}
+        </Route>
       </Router>
     </div>
   );

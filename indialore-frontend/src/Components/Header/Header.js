@@ -1,25 +1,25 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
-// import './Header.css';
+import './Header.css';
 
 function Header() {
     return (
-        <div className='headerParentDiv'>
+        <Fragment>
             <section id="header">
                 <img src="../assets/logo.png" class = "logo" alt="" />
                 
                 <div>
                     <ul id="navbar">
-                        <li><a className="active" href="index.html">Home</a></li>
-                        <li><a href="shop.html">Shop</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="../Login/login.html">Login</a></li>
-                        <li><a href="cart.html"><i class="fa-duotone fa-cart-shopping"></i></a></li>
-                        
+                        <Link className="link active" to='/'>Home</Link>
+                        <Link className="link" to='/shop'>Shop</Link>
+                        <Link className="link" to='/about'>About Us</Link>
+                        <Link className="link" to='/login'>Login</Link>
+                        <Link className="link fa-duotone fa-cart-shopping" to='/cart'>Cart</Link>
                     </ul>
                 </div>
             </section>
-        </div>
+        </Fragment>
         
     );
 }
