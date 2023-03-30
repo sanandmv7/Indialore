@@ -32,6 +32,7 @@
 #navbar .link:hover,
 #navbar .link .active {
   color: orangered;
+  cursor: pointer;
 }
 
 #navbar .link .active::after,

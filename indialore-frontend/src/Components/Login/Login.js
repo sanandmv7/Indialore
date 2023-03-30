@@ -1,10 +1,13 @@
-import React, { useState } from "react";
-
+import React, { useState, useContext } from "react";
+import { FirebaseContext } from '../../contexts/Context'
+import { useHistory } from "react-router-dom";
 // import './Login.css';
 
 function Login({ switchToSignup }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {firebase} = useContext(FirebaseContext);
+  const history = useHistory();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -16,7 +19,12 @@ function Login({ switchToSignup }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Login submitted with email: ", email, " and password: ", password);
+    // console.log("Login submitted with email: ", email, " and password: ", password);
+    firebase.auth().signInWithEmailAndPassword(email, password).then(()=>{
+      history.push('/');
+    }).catch((error)=>{
+      alert(error.message);
+    })
   };
 
   return (
