@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller-Products</title>
+     <!-- Material CDN-->
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+     <!-- StyleSheet-->
+     <link rel="stylesheet" href="./seller-style.css">
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="/assets/logo.png">
+                    <h4>INDIA<span class="danger">LORE</span></h4>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <a href="./seller.html">
+                    <span class="material-icons-sharp">grid_view</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="./store.html" class="active">
+                    <span class="material-icons-sharp">storefront</span>
+                    <h3>Store</h3>
+                </a>
+                <a href="./product.html" >
+                    <span class="material-icons-sharp">category</span>
+                    <h3>Products</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">receipt_long</span>
+                    <h3>Orders</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">message</span>
+                    <h3>Messages</h3>
+                    <span class="message-count">10</span>
+                </a>
+                <a href="../index.html">
+                    <span class="material-icons-sharp">logout</span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+<!--===========================END OF LEFT SIDE MENU==============================-->
+
+        <main>
+            <h2>Your Store</h2>
+            <div class="recent-orders">
+                <h4>Store Details</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Store ID</th>
+                            <th>GSTIN</th>
+                            <th>Name</th>
+                            <th>Owner</th>
+                            <th>Location</th>
+                            <th>Address</th>
+                            <th>Contact No.</th>
+                            <th>Email ID</th>
+                            <th>Wallet</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <a href="#">Show All</a>
+            </div>
+        </main>
+        <!--===========================END OF MAIN PART (LISTING TABLE)===================-->
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="profile">
+                    <div class="info">
+                        <p>Hello, <b>Seller</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <span class="material-icons-sharp">person</span>
+                    </div>
+                </div>
+            </div>
+            <!--====================END OF TOP=====================================---->
+
+            <!--======================END OF RECENT UPDATES======================-->
+            <div class="add-btn">
+                <div class="test-btn2">
+                    <span class="material-icons-sharp">add</span>
+                    <h3>Add a Store</h3>
+                </div>   
+            </div>
+            
+            <!--===================END OF RIGHT BUTTON===========================-->
+        </div>
+
+        <!--========================MODAL VIEW FOR PRODUCT ADD=====================-->
+        <div class="popup2">
+            <div class="close-btn">
+                <span class="material-icons-sharp">close</span>
+            </div>
+            <div class="store-form">
+                <h3>Add Store Details</h3>
+                <div class="store-form-element">
+                    <label for="store-gst">GSTIN</label>
+                    <input type="text" id="store-gst" placeholder="Enter GSTIN">
+                </div>
+                <div class="store-form-element">
+                    <label for="store-name">Store Name</label>
+                    <input type="text" id="store-name" placeholder="Enter store name">
+                </div>
+                <div class="store-form-element">
+                    <label for="store-owner">Owner Name</label>
+                    <input type="text" id="store-owner" placeholder="Enter owner's name">
+                </div>
+                <div class="store-form-element">
+                    <label for="store-address">Complete Address</label>
+                    <input type="text" id="store-address" placeholder="Enter complete address">
+                </div>
+                <div class="store-form-element">
+                    <label for="store-contact">Contact Number</label>
+                    <input type="text" id="store-contact" placeholder="Enter contact number">
+                </div>
+                <div class="store-form-element">
+                    <label for="store-email">Email ID</label>
+                    <input type="text" id="store-email" placeholder="Enter email id">
+                </div>
+                <div class="store-form-element">
+                    <input type="submit" value="Submit">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./enterStore.js"></script>
+</body>
+</html>

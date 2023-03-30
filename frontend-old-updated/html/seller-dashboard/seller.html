@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller-Dashboard</title>
+    <!-- Material CDN-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <!-- StyleSheet-->
+    <link rel="stylesheet" href="./seller-style.css">
+
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="/assets/logo.png">
+                    <h4>INDIA<span class="danger">LORE</span></h4>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <a href="./seller.html" class="active">
+                    <span class="material-icons-sharp">grid_view</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="./store.html">
+                    <span class="material-icons-sharp">storefront</span>
+                    <h3>Store</h3>
+                </a>
+                <a href="./product.html">
+                    <span class="material-icons-sharp">category</span>
+                    <h3>Products</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">receipt_long</span>
+                    <h3>Orders</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">message</span>
+                    <h3>Messages</h3>
+                    <span class="message-count">10</span>
+                </a>
+                <a href="../index.html">
+                    <span class="material-icons-sharp">logout</span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+        <!---------------------END OF ASIDE CONTAINER------------------->
+
+        <main>
+            <h2>Dashboard</h2>
+            <div class="date">
+                <input type="date">
+            </div>
+             <!--------------------BEGIN OF INSIGHTS SECTION--------------------->
+            <div class="insights">
+                <div class="sales">
+                    <span class="material-icons-sharp">analytics</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Total Sales</h3>
+                            <h2>&#8377 25000</h2>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx="45" cy="45" r="36"></circle>
+                            </svg>
+                        </div>
+                    </div>
+                    <small class="text-muted">Last 24 Hours</small>
+                </div>
+
+                <div class="store_no">
+                    <span class="material-icons-sharp">store</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Stores</h3>
+                            <h2>3</h2>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx="45" cy="45" r="36"></circle>
+                            </svg>
+                        </div>
+                    </div>
+                    <small class="text-muted">Last 24 Hours</small>
+                </div>
+
+                <div class="sales">
+                    <span class="material-icons-sharp">pending</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Pending Orders</h3>
+                            <h2>&#8377 5000</h2>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx="45" cy="45" r="36"></circle>
+                            </svg>
+                        </div>
+                    </div>
+                    <small class="text-muted">Last 24 Hours</small>
+                </div>
+            </div>
+            <!-------------------------END OF INSIGHTS SECTION--------------------->
+
+            <div class="recent-orders">
+                <h4>Recent Orders</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Product ID</th>
+                            <th>Store</th>
+                            <th>Payment</th>
+                            <th>Status</tr>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <!--<tbody>
+                        <tr>
+                            <td>XYZ</td>
+                            <td>123</td>
+                            <td>#213</td>
+                            <td>Due</td>
+                            <td class="warning">Pending</td>
+                        </tr>
+                        <tr>
+                            <td>ABC</td>
+                            <td>54</td>
+                            <td>#112</td>
+                            <td>Paid</td>
+                            <td class="success">Delivered</td>
+                        </tr>
+                        <tr>
+                            <td>DEF</td>
+                            <td>23</td>
+                            <td>#213</td>
+                            <td>Paid</td>
+                            <td class="success">Delivered</td>
+                        </tr>
+                        <tr>
+                            <td>PQR</td>
+                            <td>12</td>
+                            <td>#78</td>
+                            <td>Refund</td>
+                            <td class="danger">Cancelled</td>
+                        </tr>
+                        <tr>
+                            <td>JKL</td>
+                            <td>98</td>
+                            <td>#78</td>
+                            <td>Due</td>
+                            <td class="warning">Pending</td>
+                        </tr>
+                    </tbody>-->    
+                </table>
+                <a href="#">Show All</a>
+            </div>
+        </main>
+        <!--=====================END OF MAIN SECTION======================-->
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="profile">
+                    <div class="info">
+                        <p>Hello, <b>Seller</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <span class="material-icons-sharp">person</span>
+                    </div>
+                </div>
+            </div>
+            <!--=================END OF TOP==========================-->
+            <div class="recent-updates">
+                <h3>Recent Updates</h3>
+                <div class="updates">
+                    <div class="update">
+                        <div class="profile-photo">
+                            <span class="material-icons-sharp">face</span>
+                        </div>
+                        <div class="message">
+                            <p><b>Sumer</b> received his order of Kollahpuri Chappal.</p>
+                            <small class="text-muted">1 minutes ago</small>
+                        </div>
+                    </div>
+                    <div class="update">
+                        <div class="profile-photo">
+                            <span class="material-icons-sharp">face</span>
+                        </div>
+                        <div class="message">
+                            <p><b>Sanand MV</b> received his order of Chikankari Kurta.</p>
+                            <small class="text-muted">3 minutes ago</small>
+                        </div>
+                    </div>
+                    <div class="update">
+                        <div class="profile-photo">
+                            <span class="material-icons-sharp">face_3</span>
+                        </div>
+                        <div class="message">
+                            <p><b>Ruchi</b> received her order of Banarasi Saree.</p>
+                            <small class="text-muted">5 minutes ago</small>
+                        </div>
+                        
+                    </div>
+                    <div class="update">
+                        <div class="profile-photo">
+                            <span class="material-icons-sharp">face_3</span>
+                        </div>
+                        <div class="message">
+                            <p><b>Shivangi</b> returned her order of Paithani Saree.</p>
+                            <small class="text-muted">5 minutes ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--======================END OF RECENT UPDATES======================-->
+            <div class="add-btn">
+                <div class="item_add-store">
+                    <span class="material-icons-sharp">add</span>
+                    <h3>Add a Store</h3>
+                </div>
+                <div class="item_add-store">
+                    <span class="material-icons-sharp">add</span>
+                    <h3>Add a Product</h3>
+                </div>
+            </div>
+            <!--===================END OF RIGHT BUTTON===========================-->
+        </div>
+    </div>
+    <script src="./orders.js"></script>
+    <script src="./seller.js"></script>
+    
+</body>
+</html>
