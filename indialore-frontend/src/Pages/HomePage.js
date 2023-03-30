@@ -2,6 +2,7 @@ import React from "react";
 
 import Header from "../Components/Header/Header";
 import Directory from "../Components/Directory/Directory";
+import Footer from "../Components/Footer/Footer";
 
 import upImg from "../assets/city/banaras.jpg";
 import rajasthanImg from "../assets/city/rajasthan.jpg";
@@ -84,6 +85,7 @@ function HomePage(props) {
       <div className='test-container'>
       <Directory categories={categories} />
       </div>
+      <Footer />
     </div>
   );
 }
