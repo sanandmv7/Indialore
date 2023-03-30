@@ -61,8 +61,25 @@ function HomePage(props) {
   return (
     <div className="homePageContainer">
       <Header />
-      <section class="explore-by-state-section">
-        <div class="waviy">EXPLORE BY STATE</div>
+      <section className="explore-by-state-section">
+        <div className="waviy">
+          <span style={{'--i': 1}}>E</span>
+          <span style={{'--i': 2}}>X</span>
+          <span style={{'--i': 3}}>P</span>
+          <span style={{'--i': 4}}>L</span>
+          <span style={{'--i': 5}}>O</span>
+          <span style={{'--i': 6}}>R</span>
+          <span style={{'--i': 7}}>E</span>
+          <span style={{'--i': 8}}>&nbsp;</span>
+          <span style={{'--i': 9}}>B</span>
+          <span style={{'--i': 10}}>Y</span>
+          <span style={{'--i': 11}}>&nbsp;</span>
+          <span style={{'--i': 12}}>S</span>
+          <span style={{'--i': 13}}>T</span>
+          <span style={{'--i': 14}}>A</span>
+          <span style={{'--i': 15}}>T</span>
+          <span style={{'--i': 16}}>E</span>
+        </div>
       </section>
       <div className='test-container'>
       <Directory categories={categories} />
