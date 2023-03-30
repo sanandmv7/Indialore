@@ -15,8 +15,8 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
-    border: 1px solid black;
-    background-color: white;
+    border: 1px solid lightgray;
+    background-color: #e3e6f3;
     top: 90px;
     right: 40px;
     z-index: 5;;
@@ -26,5 +26,10 @@
     height: 240px;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
 }

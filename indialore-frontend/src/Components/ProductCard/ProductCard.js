@@ -1,8 +1,13 @@
-import React from "react";
-import shopping_cart from '../../assets/shopping_cart.svg';
+import React, { useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
+import shopping_cart from "../../assets/shopping_cart.svg";
 
 function ProductCard({ product }) {
   const { img_url, name, price, state } = product;
+  const { addItemToCart } = useContext(CartContext);
+
+  const addProductToCart = () => addItemToCart(product);
+
   return (
     <div className="pro">
       <img src={img_url} alt="" />
@@ -19,7 +24,9 @@ function ProductCard({ product }) {
         <h4>{`Rs.${price}`}</h4>
       </div>
       <span className="a">
-        <span className="material-icons-sharp cart"><img src={shopping_cart} alt='shopping_cart' /></span>
+        <span className="material-icons-sharp cart" onClick={addProductToCart}>
+          <img src={shopping_cart} alt="shopping_cart" />
+        </span>
       </span>
     </div>
   );
