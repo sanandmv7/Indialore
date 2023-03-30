@@ -1,6 +1,6 @@
 import {React, useState} from "react";
 
-// import './SignUp.css';
+import './SignUp.css';
 
 function SignUp({ switchToLogin }) {
   const [email, setEmail] = useState("");
@@ -38,7 +38,7 @@ function SignUp({ switchToLogin }) {
       {/* <div className="field">
         <input type="submit" value="Connect Wallet" required />
       </div> */}
-      <div className="field">
+      <div className="field submit-btn">
         <input type="submit" value="Register" disabled />
       </div>
       <div className="signup-link">
