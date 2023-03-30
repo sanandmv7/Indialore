@@ -27,26 +27,26 @@ function Header() {
         <div>
           <ul id="navbar">
             <Link className="link active" to="/">
-              Home
+              <span className="a">Home</span>
             </Link>
             <Link className="link" to="/shop">
-              Shop
+            <span className="a">Shop</span>
             </Link>
             <Link className="link" to="/about">
-              About Us
+            <span className="a">About Us</span>
             </Link>
             {user ? (
               <span>
                 <span className="link" onClick={handleLogOut}>
-                  Logout
+                  <span className="a">Logout</span>
                 </span>
                 <Link className="link fa-duotone fa-cart-shopping" to="/cart">
-                  Cart
+                  <span className="a">Cart</span>
                 </Link>
               </span>
             ) : (
               <Link className="link" to="/login">
-                Login
+                <span className="a">Login</span>
               </Link>
             )}
           </ul>

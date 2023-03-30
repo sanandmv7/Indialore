@@ -14,6 +14,7 @@ import himachalImg from "../assets/city/Shimla.jpg";
 import biharImg from "../assets/city/bihar.jpg";
 
 import "./HomePage.css";
+import Newsletter from "../Components/Newsletter/Newsletter";
 
 function HomePage(props) {
   const categories = [
@@ -82,9 +83,8 @@ function HomePage(props) {
           <span style={{'--i': 16}}>E</span>
         </div>
       </section>
-      <section class="flip-section">
       <Directory categories={categories} />
-      </section>
+      <Newsletter />
       <Footer />
     </div>
   );

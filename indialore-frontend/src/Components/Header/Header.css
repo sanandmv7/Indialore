@@ -47,17 +47,21 @@
 
 #navbar .link:hover,
 #navbar .link .active {
-  color: orangered;
-  cursor: pointer;
+    color: orangered;
+    transform: scaleX(1);
+    transition: transform 0.25s ease-out;
+    cursor: pointer;
 }
 
 #navbar .link .active::after,
 #navbar .link:hover::after {
   content: "";
-  width: 6%;
+  width: 23%;
   height: 2px;
   background: orangered;
   position: absolute;
   bottom: -4px;
   left: 20px;
+  transform: scaleX(0);
+  transform-origin: bottom left;
 }

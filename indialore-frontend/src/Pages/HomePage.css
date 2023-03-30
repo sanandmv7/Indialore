@@ -37,11 +37,11 @@ p {
   margin: 15px 0 20px 0;
 }
 
-.section-p1 {
+.section-p1{
   padding: 40px 80px;
 }
 
-.section-m1 {
+.section-m1{
   margin: 40px 0;
 }
 
@@ -110,7 +110,7 @@ font-size:28px;
 .flip-container {
   display: flex;
   flex-direction: row;
-  max-width: 79%;
+  max-width: 100%;
   flex-wrap: wrap;
   margin-left: 10%;
   margin-top: 3%;
