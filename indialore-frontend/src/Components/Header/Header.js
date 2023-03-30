@@ -18,7 +18,11 @@ function Header() {
   return (
     <Fragment>
       <section id="header">
-        <img src="../assets/logo.png" class="logo" alt="" />
+
+        <div id = "logo" class="logo">
+                {/* <img src={logo} alt="logo" /> */}
+                <h4>INDIA<span class="danger">LORE</span></h4>
+            </div>
 
         <div>
           <ul id="navbar">

@@ -82,9 +82,9 @@ function HomePage(props) {
           <span style={{'--i': 16}}>E</span>
         </div>
       </section>
-      <div className='test-container'>
+      <section class="flip-section">
       <Directory categories={categories} />
-      </div>
+      </section>
       <Footer />
     </div>
   );

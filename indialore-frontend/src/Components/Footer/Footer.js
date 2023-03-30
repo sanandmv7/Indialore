@@ -16,17 +16,17 @@ function Footer() {
 
       <div className="col">
         <h4>About</h4>
-        <a href="#"> Our Story</a>
-        <a href="#"> Contact Us</a>
-        <a href="#"> Privacy policy</a>
+        <a href="/"> Our Story</a>
+        <a href="/"> Contact Us</a>
+        <a href="/"> Privacy policy</a>
       </div>
 
       <div className="col">
         <h4>Support</h4>
-        <a href="#"> Payments</a>
-        <a href="#"> Return/Exhange</a>
-        <a href="#"> Shipment</a>
-        <a href="#"> Terms &amp; Conditions</a>
+        <a href="/"> Payments</a>
+        <a href="/"> Return/Exhange</a>
+        <a href="/"> Shipment</a>
+        <a href="/"> Terms &amp; Conditions</a>
       </div>
 
       <div className="col">

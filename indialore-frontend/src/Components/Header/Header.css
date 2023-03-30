@@ -3,13 +3,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap");
 
 /* Header */
-#header {
+#header{
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px 80px;
   background: #e3e6f3;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+  z-index: 999;
+  position: sticky !important;
+  top: 0;
+  left: 0;
+}
+
+#header .logo img{
+  height: 70px;
+  align-items:flex-start;
+  object-fit: cover;
+  display: none;
+}
+
+#header .logo{
+  display: flex;
+  cursor: pointer;
 }
 
 #navbar {
@@ -44,10 +60,4 @@
   position: absolute;
   bottom: -4px;
   left: 20px;
-}
-
-.logo {
-  height: 90px;
-  align-items: flex-start;
-  object-fit: cover;
 }
