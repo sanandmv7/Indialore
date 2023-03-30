@@ -30,7 +30,7 @@ footer{
     margin-top: 0px;
   }
   
-  footer a{
+  footer .footer-link{
     font-size: 13px;
     text-decoration: none;
     color: #222;

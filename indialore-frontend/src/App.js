@@ -2,19 +2,27 @@ import React, { useEffect, useContext } from "react";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import LoginPage from './Pages/LoginPage';
+import LoginPage from "./Pages/LoginPage";
 import HomePage from "./Pages/HomePage";
 import { AuthContext, FirebaseContext } from "./contexts/Context";
+import StoryPage from "./Pages/StoryPage";
+import ContactPage from "./Pages/ContactPage";
+import PolicyPage from "./Pages/PolicyPage";
+import PaymentsPage from "./Pages/PaymentsPage";
+import ReturnPage from "./Pages/ReturnPage";
+import ShipmentPage from "./Pages/ShipmentPage";
+import TncPage from "./Pages/TncPage";
+import AboutPage from "./Pages/AboutPage";
 
 function App() {
-  const {setUser} = useContext(AuthContext);
-  const {firebase} = useContext(FirebaseContext);
+  const { setUser } = useContext(AuthContext);
+  const { firebase } = useContext(FirebaseContext);
 
-  useEffect(()=>{
-    firebase.auth().onAuthStateChanged((user)=>{
-      setUser(user)
-    })
-  })
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      setUser(user);
+    });
+  });
 
   return (
     <div>
@@ -23,7 +31,31 @@ function App() {
           <HomePage />
         </Route>
         <Route path="/login">
-        <LoginPage />
+          <LoginPage />
+        </Route>
+        <Route path="/about">
+          <AboutPage />
+        </Route>
+        <Route path="/story">
+          <StoryPage />
+        </Route>
+        <Route path="/contact">
+          <ContactPage />
+        </Route>
+        <Route path="/policy">
+          <PolicyPage />
+        </Route>
+        <Route path="/payments">
+          <PaymentsPage />
+        </Route>
+        <Route path="/return">
+          <ReturnPage />
+        </Route>
+        <Route path="/shipment">
+          <ShipmentPage />
+        </Route>
+        <Route path="/tnc">
+          <TncPage />
         </Route>
       </Router>
     </div>

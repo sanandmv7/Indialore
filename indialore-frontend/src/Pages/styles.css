@@ -1,0 +1,14 @@
+/*========================= Resource Pages ========================================*/
+.matter-head{
+    text-align: center;
+    width: 100%;
+  }
+  
+  .matter-head h2{
+    margin-bottom: 60px;
+    text-align: center;
+  }
+  
+  .matter-content p{
+    text-align: center;
+  }
