@@ -18,6 +18,20 @@ function SignUp() {
         <div className="field">
           <input type="submit" value="Register" />
         </div>
+        <div id="gSignInWrapper">
+          <span class="label">Sign in with:</span>
+          <div id="customBtn" class="customGPlusSignIn">
+            <span class="icon1"></span>
+            <span class="buttonText">Google</span>
+          </div>
+        </div>
+        <div id="fbSignInWrapper">
+          <span class="label">Sign in with:</span>
+          <div id="customBtn" class="customFBSignIn">
+            <span class="icon2"></span>
+            <span class="buttonText">Facebook</span>
+          </div>
+        </div>
       </form>
     </div>
   );

@@ -126,7 +126,7 @@ input[type="radio"]{
 
 .form-inner form .field input{
     height: 100%;
-    width: auto;
+    width: 100%;
     outline: none;
     padding-left: 5px;
     font-size: 17px;
@@ -168,12 +168,82 @@ input[type="radio"]{
 form .field input[type="submit"]{
     color: #fff;
     font-size: 20px;
+    width: 100%;
     font-weight: 500;
     padding-left: 0px;
     border: none;
-    /*background: -webkit-linear-gradient(left, #a445b2, #fa4299);*/
-    background: -webkit-linear-gradient(left, #3c1053, #ad5389, #3c1053);
-    background: -webkit-linear-gradient(right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, #fdbb2d, #b21f1f, #1a2a6c);  /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(right, #2C5364, #203A43, #0F2027);  
     cursor: pointer;
+    transition: 550ms ease;
 }
+
+form .field input[type="submit"]:hover{
+    background:#ad5389;
+}
+
+#customBtn {
+    margin-top: 10px;
+    margin-left: 10px;
+    display: inline-block;
+    background: white;
+    color: #444;
+    width: 190px;
+    border-radius: 5px;
+    border: thin solid #888;
+    white-space: nowrap;
+    transition: all 300ms ease;
+  }
+  #customFBBtn {
+    margin-top: 10px;
+    margin-left: 10px;
+    display: inline-block;
+    background: #4285f4;
+    color: white;
+    width: 190px;
+    border-radius: 5px;
+    border: thin solid #888;
+    white-space: nowrap;
+    transition: all 300ms ease;
+  }
+  #customBtn:hover {
+    cursor: pointer;
+    background: #4285f4;
+    box-shadow: 1px 1px 1px grey;
+    color: white;
+  }
+  #customFBBtn:hover{
+    cursor: pointer;
+    background: white;
+    box-shadow: 1px 1px 1px grey;
+    color: #444;
+  }
+  span.label {
+    font-family: serif;
+    font-weight: normal;
+  }
+  span.icon1 {
+    background: url('../assets/google.png') transparent 5px 50% no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    width: 42px;
+    height: 42px;
+  }
+
+  span.icon2 {
+    background: url('../assets/fb.png') transparent 5px 50% no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    width: 42px;
+    height: 42px;
+  }
+
+  span.buttonText {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 42px;
+    padding-right: 42px;
+    font-size: 14px;
+    font-weight: bold;
+    /* Use the Roboto font that is loaded in the <head> */
+    font-family: 'Roboto', sans-serif;
+  }
