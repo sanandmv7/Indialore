@@ -4,12 +4,15 @@ import App from "./App";
 import Context, { FirebaseContext } from "./contexts/UserContext";
 import firebase from "./firebase/config";
 import { ProductsProvider } from "./contexts/ProductContext";
+import { CartProvider } from "./contexts/CartContext";
 
 ReactDOM.render(
   <FirebaseContext.Provider value={{ firebase }}>
     <Context>
       <ProductsProvider>
-        <App />
+        <CartProvider>
+          <App />
+        </CartProvider>
       </ProductsProvider>
     </Context>
   </FirebaseContext.Provider>,

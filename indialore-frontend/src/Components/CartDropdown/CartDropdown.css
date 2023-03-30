@@ -1,0 +1,30 @@
+.field input[type="submit"] {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 10px;
+  border: none;
+  background: -webkit-linear-gradient(right, #2c5364, #203a43, #0f2027);
+  cursor: pointer;
+}
+
+.cart-dropdown-container {
+    position: absolute;
+    width: 240px;
+    height: 340px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid black;
+    background-color: white;
+    top: 90px;
+    right: 40px;
+    z-index: 5;;
+}
+
+.cart-dropdown-container .cart-items {
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
