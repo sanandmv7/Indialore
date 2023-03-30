@@ -14,6 +14,8 @@ import ShipmentPage from "./Pages/ShipmentPage";
 import TncPage from "./Pages/TncPage";
 import AboutPage from "./Pages/AboutPage";
 import ShopPage from "./Pages/ShopPage";
+import { PostProvider } from "./contexts/PostContext";
+import ProductPage from "./Pages/ProductPage";
 
 function App() {
   const { setUser } = useContext(AuthContext);
@@ -27,41 +29,46 @@ function App() {
 
   return (
     <div>
-      <Router>
-        <Route exact path="/">
-          <HomePage />
-        </Route>
-        <Route path="/shop">
-          <ShopPage />
-        </Route>
-        <Route path="/login">
-          <LoginPage />
-        </Route>
-        <Route path="/about">
-          <AboutPage />
-        </Route>
-        <Route path="/story">
-          <StoryPage />
-        </Route>
-        <Route path="/contact">
-          <ContactPage />
-        </Route>
-        <Route path="/policy">
-          <PolicyPage />
-        </Route>
-        <Route path="/payments">
-          <PaymentsPage />
-        </Route>
-        <Route path="/return">
-          <ReturnPage />
-        </Route>
-        <Route path="/shipment">
-          <ShipmentPage />
-        </Route>
-        <Route path="/tnc">
-          <TncPage />
-        </Route>
-      </Router>
+      <PostProvider>
+        <Router>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route path="/shop">
+            <ShopPage />
+          </Route>
+          <Route path="/view">
+            <ProductPage />
+          </Route>
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+          <Route path="/about">
+            <AboutPage />
+          </Route>
+          <Route path="/story">
+            <StoryPage />
+          </Route>
+          <Route path="/contact">
+            <ContactPage />
+          </Route>
+          <Route path="/policy">
+            <PolicyPage />
+          </Route>
+          <Route path="/payments">
+            <PaymentsPage />
+          </Route>
+          <Route path="/return">
+            <ReturnPage />
+          </Route>
+          <Route path="/shipment">
+            <ShipmentPage />
+          </Route>
+          <Route path="/tnc">
+            <TncPage />
+          </Route>
+        </Router>
+      </PostProvider>
     </div>
   );
 }
