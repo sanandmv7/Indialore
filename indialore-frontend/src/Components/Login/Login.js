@@ -1,29 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 
 // import './Login.css';
 
-function Login() {
+function Login({ switchToSignup }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Login submitted with email: ", email, " and password: ", password);
+  };
+
   return (
-    <div>
-      <form action="#" class="login">
-        <div class="field">
-          <input type="text" placeholder="Email address" required />
-        </div>
-        <div class="field">
-          <input type="password" placeholder="Password" required />
-        </div>
-        <div class="pass-link">
-          <a href="/">Forgot password?</a>
-        </div>
-        <div class="field">
-          <input type="submit" value="Login" />
-        </div>
-        <div class="signup-link">
-          Not a member yet?
-          <a href="/signup">Signup Now</a>
-        </div>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} className="login">
+      <div className="field">
+        <input type="text" placeholder="Email address" value={email} onChange={handleEmailChange} required />
+      </div>
+      <div className="field">
+        <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} required />
+      </div>
+      <div className="pass-link">
+        <a href="/login">Forgot password?</a>
+      </div>
+      <div className="field">
+        <input type="submit" value="Login" />
+      </div>
+      <div className="signup-link">
+        Not a member yet?
+        <a href="/login" onClick={switchToSignup}>
+          Signup Now
+        </a>
+      </div>
+    </form>
   );
 }
 

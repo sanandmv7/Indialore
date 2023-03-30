@@ -3,6 +3,15 @@ import React from "react";
 import Header from "../Components/Header/Header";
 import Directory from "../Components/Directory/Directory";
 
+import upImg from "../assets/city/banaras.jpg";
+import rajasthanImg from "../assets/city/rajasthan.jpg";
+import karnatakaImg from "../assets/city/hydrabad.jpg";
+import kashmirImg from "../assets/city/kashmir.jpg";
+import keralaImg from "../assets/city/kerela.jpg";
+import mhImg from "../assets/city/maharashtra.jpg";
+import himachalImg from "../assets/city/Shimla.jpg";
+import biharImg from "../assets/city/bihar.jpg";
+
 import "./HomePage.css";
 
 function HomePage(props) {
@@ -10,42 +19,42 @@ function HomePage(props) {
     {
       id: 1,
       categoryName: "UTTAR PRADESH",
-      imageUrl: "https://res.cloudinary.com/defrv9zuz/image/upload/v1680092858/banaras_t093hz.jpg",
+      imageUrl: upImg,
     },
     {
       id: 2,
       categoryName: "RAJASTHAN",
-      imageUrl: "https://res.cloudinary.com/defrv9zuz/image/upload/v1680094497/rajasthan_xep4fp.jpg",
+      imageUrl: rajasthanImg,
     },
     {
       id: 3,
       categoryName: "KARNATAKA",
-      imageUrl: "https://res.cloudinary.com/defrv9zuz/image/upload/v1680094474/hydrabad_s2lzpf.jpg",
+      imageUrl: karnatakaImg,
     },
     {
       id: 4,
       categoryName: "KASHMIR",
-      imageUrl: "https://res.cloudinary.com/defrv9zuz/image/upload/v1680094492/kashmir_oovdxl.jpg",
+      imageUrl: kashmirImg,
     },
     {
       id: 5,
       categoryName: "KERALA",
-      imageUrl: "https://res.cloudinary.com/defrv9zuz/image/upload/v1680094494/kerela_h63sps.jpg",
+      imageUrl: keralaImg,
     },
     {
       id: 6,
       categoryName: "MAHARASHTRA",
-      imageUrl: "https://res.cloudinary.com/defrv9zuz/image/upload/v1680094496/maharashtra_ocnohd.jpg",
+      imageUrl: mhImg,
     },
     {
       id: 7,
       categoryName: "HIMACHAL",
-      imageUrl: "https://res.cloudinary.com/defrv9zuz/image/upload/v1680097152/Shimla_yabpmq.jpg",
+      imageUrl: himachalImg,
     },
     {
       id: 8,
       categoryName: "BIHAR",
-      imageUrl: "https://res.cloudinary.com/defrv9zuz/image/upload/v1680097149/bihar_nlalyf.jpg",
+      imageUrl: biharImg,
     },
   ];
 

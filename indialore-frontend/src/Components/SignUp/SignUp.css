@@ -169,7 +169,7 @@ input[type="radio"]{
     align-content: center;
 }
 
-form .field input[type="submit"]{
+form .field .signup-btn{
     color: #fff;
     font-size: 20px;
     font-weight: 500;
