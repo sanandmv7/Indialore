@@ -1,5 +1,5 @@
 import {React, useState, useContext} from "react";
-import { FirebaseContext } from "../../contexts/Context";
+import { FirebaseContext } from "../../contexts/UserContext";
 import { useHistory } from "react-router-dom";
 
 import './SignUp.css';

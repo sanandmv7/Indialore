@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import LoginPage from "./Pages/LoginPage";
 import HomePage from "./Pages/HomePage";
-import { AuthContext, FirebaseContext } from "./contexts/Context";
+import { AuthContext, FirebaseContext } from "./contexts/UserContext";
 import StoryPage from "./Pages/StoryPage";
 import ContactPage from "./Pages/ContactPage";
 import PolicyPage from "./Pages/PolicyPage";
@@ -13,6 +13,7 @@ import ReturnPage from "./Pages/ReturnPage";
 import ShipmentPage from "./Pages/ShipmentPage";
 import TncPage from "./Pages/TncPage";
 import AboutPage from "./Pages/AboutPage";
+import ShopPage from "./Pages/ShopPage";
 
 function App() {
   const { setUser } = useContext(AuthContext);
@@ -29,6 +30,9 @@ function App() {
       <Router>
         <Route exact path="/">
           <HomePage />
+        </Route>
+        <Route path="/shop">
+          <ShopPage />
         </Route>
         <Route path="/login">
           <LoginPage />

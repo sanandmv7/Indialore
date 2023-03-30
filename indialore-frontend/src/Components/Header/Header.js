@@ -1,7 +1,7 @@
 import React, { Fragment, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { AuthContext, FirebaseContext } from "../../contexts/Context";
+import { AuthContext, FirebaseContext } from "../../contexts/UserContext";
 
 import "./Header.css";
 
@@ -21,7 +21,7 @@ function Header() {
 
         <div id = "logo" class="logo">
                 {/* <img src={logo} alt="logo" /> */}
-                <h4>INDIA<span class="danger">LORE</span></h4>
+                <h4>INDIA<span className="danger">LORE</span></h4>
             </div>
 
         <div>

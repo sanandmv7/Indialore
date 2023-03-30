@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "description": "test description",
+    "img_url": "https://firebasestorage.googleapis.com/v0/b/indialore-73305.appspot.com/o/Products_data%2FPashmina%20Shawls.jpg?alt=media&token=3a953ba7-34fa-4c51-8267-c9494ef4e6c2",
+    "name": "Pashmina Shawls",
+    "price": 2000,
+    "state": "Kashmir"
+  },
+  {
+    "id": 2,
+    "description": "test",
+    "img_url": "https://firebasestorage.googleapis.com/v0/b/indialore-73305.appspot.com/o/Products_data%2FKolhapuri%20Chappal-Maharashtra.jpg?alt=media&token=1ea0d36b-2482-4288-9d3b-d38ecd06db80",
+    "name": "Kolhapuri chappal",
+    "price": 500,
+    "state": "maharashtra"
+  },
+  {
+    "id": 3,
+    "description": "test",
+    "img_url": "https://firebasestorage.googleapis.com/v0/b/indialore-73305.appspot.com/o/Products_data%2FKansaris%20brass-Rajasthan.jpg?alt=media&token=b0d0b2fb-bec3-4d9c-b910-92a4da54b0ad",
+    "name": "Kansaris Brass",
+    "price": 5000,
+    "state": "Rajasthan"
+  },
+  {
+    "id": 4,
+    "description": "test",
+    "img_url": "https://firebasestorage.googleapis.com/v0/b/indialore-73305.appspot.com/o/Products_data%2FShells-Odisha.png?alt=media&token=16218d8d-db2c-41b7-a4a0-a623e7ecad87",
+    "name": "Shells",
+    "price": 2000,
+    "state": "Odisha"
+  },
+  {
+    "id": 5,
+    "description": "test",
+    "img_url": "https://firebasestorage.googleapis.com/v0/b/indialore-73305.appspot.com/o/Products_data%2FWoodwork-Punjab.jpg?alt=media&token=23cbf8e0-5ce7-4365-8dbb-a0cd18d3a8d6",
+    "name": "Woodwork",
+    "price": 3000,
+    "state": "Punjab"
+  }
+]
