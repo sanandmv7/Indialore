@@ -65,3 +65,32 @@
   transform: scaleX(0);
   transform-origin: bottom left;
 }
+
+#searchbar input{
+  height: 2rem;
+  padding: 0 1.25em;
+  font-size: 16px;
+  width: 70%;
+  border: 1px solid transparent;
+  border-radius: 25px;
+  outline: none;
+  border-top-right-radius:0;
+  border-bottom-right-radius:0;
+  color: #333;
+}
+
+#searchbar button{
+  display: inline-block;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  height: 2rem;
+  left: -3px;
+  transition: 350ms ease;
+  background-color: #088178;
+  
+}
+
+#searchbar button:hover{
+  cursor: pointer;
+  background-color: orangered;
+}
