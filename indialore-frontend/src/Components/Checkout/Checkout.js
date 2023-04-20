@@ -7,14 +7,16 @@ import "./Checkout.css";
 import axios from "axios";
 import logo from "../../assets/logo.svg";
 
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import { FirebaseContext } from "../../contexts/UserContext";
 
 function Checkout() {
   const { cartItems, cartTotal } = useContext(CartContext);
-  const [ deliveryCharge ] = useState(49);
+  const [deliveryCharge] = useState(49);
 
   const history = useHistory();
 
+  const { firebase } = useContext(FirebaseContext);
 
   function loadScript(src) {
     return new Promise((resolve) => {
@@ -61,11 +63,21 @@ function Checkout() {
       description: "Test Transaction",
       image: { logo },
       order_id: order_id,
-      // redirect: true,
-      // callback_url: `http://${document.location.hostname}:3000/paymentsuccess`,
       handler: async function (response) {
         // alert("Thank you for your order.");
-        history.push('/thankyou');
+        history.push("/thankyou");
+
+        // add to firebase
+        firebase
+          .firestore()
+          .collection("orders")
+          .add({
+            order_id: order_id,
+            amount: amount.toString(),
+          })
+          .catch((error) => {
+            alert(error.message);
+          });
 
         const data = {
           orderCreationId: order_id,
@@ -82,7 +94,7 @@ function Checkout() {
         // alert(result.data.msg);
       },
       prefill: {
-        name: "Name"
+        name: "Name",
       },
       notes: {
         address: "IndiaLore Corporate Office",
