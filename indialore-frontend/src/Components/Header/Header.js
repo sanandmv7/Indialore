@@ -29,6 +29,11 @@ function Header() {
           </h4>
         </div>
 
+        <div id="searchbar">
+          <input type="text" placeholder="search..." />
+          <button class="normal-button">Search</button>
+        </div>
+
         <div>
           <ul id="navbar">
             <Link className="link active" to="/">

@@ -1,11 +1,17 @@
 import React, { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
 import CartItem from "../CartItem/CartItem";
+import { useHistory } from 'react-router-dom';
 
 import "./CartDropdown.css";
 
 const CartDropdown = () => {
   const { cartItems } = useContext(CartContext);
+  const history = useHistory();
+
+  const goToCheckoutHandler = () => {
+    history.push('/checkout')
+  }
 
   return (
     <div className="cart-dropdown-container">
@@ -19,7 +25,7 @@ const CartDropdown = () => {
         )}
       </div>
       <div className="field">
-        <input type="submit" value="CHECKOUT >>" />
+        <input type="submit" value="CHECKOUT >>" onClick={goToCheckoutHandler} />
       </div>
     </div>
   );

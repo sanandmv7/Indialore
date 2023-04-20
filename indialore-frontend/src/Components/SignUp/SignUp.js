@@ -27,22 +27,26 @@ function SignUp({ switchToLogin }) {
     e.preventDefault();
     // console.log("Submitting credentials");
     // console.log("Signup submitted with email: ", email, " and password: ", password);
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(
-      (result)=>{
-        // console.log("Got result");
-        firebase.firestore().collection('users').add({
-          id: result.user.uid,
-          email: email
-        }).then(
-          ()=>{
-            // console.log("Pushing history");
-            history.push('/');
-          }
-        ).catch((error)=>{
-          alert(error.message);
-        })
-      }
-    );
+    if(password === confirmPassword){
+      firebase.auth().createUserWithEmailAndPassword(email, password).then(
+        (result)=>{
+          // console.log("Got result");
+          firebase.firestore().collection('users').add({
+            id: result.user.uid,
+            email: email
+          }).then(
+            ()=>{
+              // console.log("Pushing history");
+              history.push('/');
+            }
+          ).catch((error)=>{
+            alert(error.message);
+          })
+        }
+      );
+    } else {
+      alert("Passwords doesn't match");
+    }
   };
 
   return (

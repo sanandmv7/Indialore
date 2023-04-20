@@ -1,9 +1,12 @@
-import React, { useContext } from 'react';
-import { PostContext } from '../../contexts/PostContext';
+import React, { useContext } from "react";
+import { PostContext } from "../../contexts/PostContext";
+import { CartContext } from "../../contexts/CartContext";
 
 function ProductDetails() {
-    const {productDetails} = useContext(PostContext);
+  const { productDetails } = useContext(PostContext);
+  const { addItemToCart } = useContext(CartContext);
 
+  const addProductToCart = () => addItemToCart(productDetails);
 
   return (
     <section id="pro-details" className="section-p1">
@@ -35,11 +38,9 @@ function ProductDetails() {
           <option>XL</option>
         </select>
         <input type="number" defaultValue={1} />
-        <button className="normal-button">Add to Cart</button>
+        <button className="normal-button" onClick={addProductToCart}>Add to Cart</button>
         <h4>Product Details</h4>
-        <span>
-          {productDetails.description}
-        </span>
+        <span>{productDetails.description}</span>
       </div>
     </section>
   );

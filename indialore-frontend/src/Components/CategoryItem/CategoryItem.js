@@ -1,17 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // import './CategoryItem.css';
 
 function CategoryItem({ category }) {
-  const { categoryName, imageUrl} = category;
+  const { name, img_url} = category;
   return (
     <div className="flipper">
       <div className="front">
-        <img src={imageUrl} className="city" alt="cityImage" />
-        <span className="name">{categoryName}</span>
-        <button type="button" onClick={()=>{}} className="explore-button">
-          <span>EXPLORE</span>
-        </button>
+        <img src={img_url} className="city" alt="cityImage" />
+        <span className="name">{name}</span>
+        <Link to="/shop">
+          <button type="button" className="explore-button">
+            <span>EXPLORE</span>
+          </button>
+        </Link>
       </div>
     </div>
   );
