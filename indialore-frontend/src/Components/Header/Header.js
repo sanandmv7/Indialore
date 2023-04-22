@@ -5,6 +5,7 @@ import { AuthContext, FirebaseContext } from "../../contexts/UserContext";
 import CartIcon from "../CartIcon/CartIcon";
 import CartDropdown from "../CartDropdown/CartDropdown";
 import { CartContext } from "../../contexts/CartContext";
+import { SearchContext } from "../../contexts/SearchContext";
 
 import "./Header.css";
 
@@ -13,10 +14,20 @@ function Header() {
   const { firebase } = useContext(FirebaseContext);
   const history = useHistory();
   const { isCartOpen } = useContext(CartContext);
+  const { searchString, setSearchString } = useContext(SearchContext);
+  
 
   const handleLogOut = () => {
     firebase.auth().signOut();
     history.push("/");
+  };
+
+  const handleSearchStringChange = (e)=>{
+    setSearchString(e.target.value);
+  };
+
+  const handleSearch = () => {
+    history.push("/search");
   };
 
   return (
@@ -30,8 +41,8 @@ function Header() {
         </div>
 
         <div id="searchbar">
-          <input type="text" placeholder="search..." />
-          <button class="normal-button">Search</button>
+          <input type="text" placeholder="search..." value={searchString} onChange={handleSearchStringChange} />
+          <button class="normal-button" onClick={handleSearch}>Search</button>
         </div>
 
         <div>

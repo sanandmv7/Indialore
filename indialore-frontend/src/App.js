@@ -15,11 +15,13 @@ import TncPage from "./Pages/TncPage";
 import AboutPage from "./Pages/AboutPage";
 import ShopPage from "./Pages/ShopPage";
 import { PostProvider } from "./contexts/PostContext";
+import { SearchProvider } from "./contexts/SearchContext";
 import ProductPage from "./Pages/ProductPage";
 import CheckoutPage from "./Pages/CheckoutPage";
 import PaymentSuccessPage from "./Pages/PaymentSuccessPage";
 import Dashboard from "./Pages/Dashboard";
 import ProductDashboard from "./Pages/ProductDashboard";
+import SearchResultsPage from "./Pages/SearchResultsPage";
 
 function App() {
   const { setUser } = useContext(AuthContext);
@@ -34,56 +36,61 @@ function App() {
   return (
     <div>
       <PostProvider>
-        <Router>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route path="/shop">
-            <ShopPage />
-          </Route>
-          <Route path="/view">
-            <ProductPage />
-          </Route>
-          <Route path="/login">
-            <LoginPage />
-          </Route>
-          <Route path="/checkout">
-            <CheckoutPage />
-          </Route>
-          <Route path="/about">
-            <AboutPage />
-          </Route>
-          <Route path="/story">
-            <StoryPage />
-          </Route>
-          <Route path="/contact">
-            <ContactPage />
-          </Route>
-          <Route path="/policy">
-            <PolicyPage />
-          </Route>
-          <Route path="/payments">
-            <PaymentsPage />
-          </Route>
-          <Route path="/return">
-            <ReturnPage />
-          </Route>
-          <Route path="/shipment">
-            <ShipmentPage />
-          </Route>
-          <Route path="/thankyou">
-            <PaymentSuccessPage />
-          </Route>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
-          <Route path="/dashboard-products">
-            <ProductDashboard />
-          </Route>
-          <Route path="/tnc">
-            <TncPage />
-          </Route>
-        </Router>
+        <SearchProvider>
+          <Router>
+            <Route exact path="/">
+              <HomePage />
+            </Route>
+            <Route path="/shop">
+              <ShopPage />
+            </Route>
+            <Route path="/view">
+              <ProductPage />
+            </Route>
+            <Route path="/login">
+              <LoginPage />
+            </Route>
+            <Route path="/checkout">
+              <CheckoutPage />
+            </Route>
+            <Route path="/about">
+              <AboutPage />
+            </Route>
+            <Route path="/story">
+              <StoryPage />
+            </Route>
+            <Route path="/contact">
+              <ContactPage />
+            </Route>
+            <Route path="/policy">
+              <PolicyPage />
+            </Route>
+            <Route path="/payments">
+              <PaymentsPage />
+            </Route>
+            <Route path="/return">
+              <ReturnPage />
+            </Route>
+            <Route path="/shipment">
+              <ShipmentPage />
+            </Route>
+            <Route path="/thankyou">
+              <PaymentSuccessPage />
+            </Route>
+            <Route path="/dashboard">
+              <Dashboard />
+            </Route>
+            <Route path="/search">
+              <SearchResultsPage />
+            </Route>
+            <Route path="/dashboard-products">
+              <ProductDashboard />
+            </Route>
+            <Route path="/tnc">
+              <TncPage />
+            </Route>
+          </Router>
+        </SearchProvider>
       </PostProvider>
     </div>
   );
