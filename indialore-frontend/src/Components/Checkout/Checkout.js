@@ -8,7 +8,7 @@ import axios from "axios";
 import logo from "../../assets/logo.svg";
 
 import { useHistory } from "react-router-dom";
-import { FirebaseContext } from "../../contexts/UserContext";
+import { AuthContext, FirebaseContext } from "../../contexts/UserContext";
 
 function Checkout() {
   const { cartItems, cartTotal } = useContext(CartContext);
@@ -17,6 +17,7 @@ function Checkout() {
   const history = useHistory();
 
   const { firebase } = useContext(FirebaseContext);
+  const { user } = useContext(AuthContext);
 
   function loadScript(src) {
     return new Promise((resolve) => {
@@ -74,6 +75,7 @@ function Checkout() {
           .add({
             order_id: order_id,
             amount: amount.toString(),
+            buyer: user.uid,
           })
           .catch((error) => {
             alert(error.message);

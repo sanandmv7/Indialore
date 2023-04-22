@@ -18,6 +18,8 @@ import { PostProvider } from "./contexts/PostContext";
 import ProductPage from "./Pages/ProductPage";
 import CheckoutPage from "./Pages/CheckoutPage";
 import PaymentSuccessPage from "./Pages/PaymentSuccessPage";
+import Dashboard from "./Pages/Dashboard";
+import ProductDashboard from "./Pages/ProductDashboard";
 
 function App() {
   const { setUser } = useContext(AuthContext);
@@ -71,6 +73,12 @@ function App() {
           </Route>
           <Route path="/thankyou">
             <PaymentSuccessPage />
+          </Route>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
+          <Route path="/dashboard-products">
+            <ProductDashboard />
           </Route>
           <Route path="/tnc">
             <TncPage />

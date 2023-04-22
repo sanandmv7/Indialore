@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
-import shopping_cart from "../../assets/shopping_cart.svg";
 import { PostContext } from "../../contexts/PostContext";
 import { useHistory } from "react-router-dom";
+
+import ShoppingCartSharpIcon from '@mui/icons-material/ShoppingCartSharp';
 
 function ProductCard({ product }) {
   const { img_url, name, price, state } = product;
@@ -36,7 +37,7 @@ function ProductCard({ product }) {
       </div>
       <span className="a">
         <span className="material-icons-sharp cart" onClick={addProductToCart}>
-          <img src={shopping_cart} alt="shopping_cart" />
+          <ShoppingCartSharpIcon />
         </span>
       </span>
     </div>
