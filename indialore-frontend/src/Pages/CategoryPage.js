@@ -40,12 +40,18 @@ function CategoryPage() {
         <div className="product-container">
           {products
             .filter((product) => {
-              return product.state
-                .toLowerCase()
-                .includes(selectedCategory.toLowerCase());
+              // console.log(`name: ${product.name}`)
+              // console.log(`selected: ${selectedCategory}`)
+              try {
+                return product.state
+                  .toLowerCase()
+                  .includes(selectedCategory.toLowerCase());
+              } catch (e) {
+                console.log(e);
+              }
             })
-            .map((product) => (
-              <ProductCard key={product.id} product={product} />
+            .map((fp) => (
+              <ProductCard key={fp.id} product={fp} />
             ))}
         </div>
       </section>

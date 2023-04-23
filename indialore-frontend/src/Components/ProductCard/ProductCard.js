@@ -21,7 +21,7 @@ function ProductCard({ product }) {
           history.push("/view");
         }}
       >
-        <img src={img_url} alt="" />
+        <img src={img_url} alt="" height="450" />
         <div className="desc">
           <span>{state}</span>
           <h5>{name}</h5>

@@ -1,0 +1,102 @@
+.accordion-header{
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: #333;
+    color: #fff;
+    text-align: left;
+  
+  }
+  
+  .accordion-item{
+    padding: 10px;
+  }
+  
+  
+  .accordion-content{
+   margin-top: 20px;
+   overflow: hidden;
+  }
+  
+  .accordion{
+    width: 100%;
+  }
+  
+  #name{
+    width: 100%;
+    display: flex;
+    height: 45px;
+    text-indent: 10px;
+    font-size: medium;
+    gap:  10px;
+    margin-bottom: 10px;
+  }
+  
+  #fname{
+    display: inline-flex;
+    width: 50%;
+    height: 45px;
+    text-indent: 10px;
+    font-size: medium;
+   
+  }
+  
+  #lname{
+    display: inline-flex;
+    width: 50%;
+    height: 45px;
+    text-indent: 10px;
+    font-size: medium;
+  } 
+  
+  #street{
+    width: 100%;
+    height: 45px;
+    text-align: left;
+    text-indent: 10px;
+    font-size: medium;
+  }
+  
+  #house{
+    margin-top: 10px;
+    width: 100%;
+    height: 45px;
+    text-align: left;
+    text-indent: 10px;
+    font-size: medium;
+  }
+  
+  #city, #state, #pincode{
+    margin-top: 10px;
+    width: 33.33%;
+    height: 45px;
+    text-indent: 10px;
+    font-size: medium;
+  }
+  
+  #contact, #mail{
+    margin-top: 10px;
+    width: 50%;
+    height: 45px;
+  
+    text-indent: 10px;
+    font-size: medium;
+  }
+  
+  #check-btn{
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .accordion-content-pay{
+    padding: 20px;
+  }
+  
+  
+  .accordion-content-pay img{
+    width: 250px;
+  }
+  
+  #check-btn{
+    margin-left: 30%;
+  }

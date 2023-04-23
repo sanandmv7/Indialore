@@ -4,11 +4,7 @@ import { CartContext } from "../../contexts/CartContext";
 import CheckoutItem from "../CheckoutItem/CheckoutItem";
 import "./Checkout.css";
 
-import axios from "axios";
-import logo from "../../assets/logo.svg";
-
 import { useHistory } from "react-router-dom";
-import { AuthContext, FirebaseContext } from "../../contexts/UserContext";
 
 function Checkout() {
   const { cartItems, cartTotal } = useContext(CartContext);
@@ -16,103 +12,9 @@ function Checkout() {
 
   const history = useHistory();
 
-  const { firebase } = useContext(FirebaseContext);
-  const { user } = useContext(AuthContext);
-
-  function loadScript(src) {
-    return new Promise((resolve) => {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = () => {
-        resolve(true);
-      };
-      script.onerror = () => {
-        resolve(false);
-      };
-      document.body.appendChild(script);
-    });
-  }
-
-  async function displayRazorpay() {
-    const res = await loadScript(
-      "https://checkout.razorpay.com/v1/checkout.js"
-    );
-
-    if (!res) {
-      alert("Razorpay SDK failed to load. Are you online?");
-      return;
-    }
-
-    const result = await axios.post(
-      `http://${document.location.hostname}:5000/payment/orders`,
-      { amount: cartTotal + deliveryCharge }, // pass the amount as a parameter
-      { headers: { "Content-Type": "application/json" } }
-    );
-
-    if (!result) {
-      alert("Server error. Are you online?");
-      return;
-    }
-
-    const { amount, id: order_id, currency } = result.data;
-
-    const options = {
-      key: "rzp_test_29uyaVVF7MwK4l", // Enter the Key ID generated from the Dashboard
-      amount: amount.toString(),
-      currency: currency,
-      name: "INDIALORE",
-      description: "Test Transaction",
-      image: { logo },
-      order_id: order_id,
-      handler: async function (response) {
-        // alert("Thank you for your order.");
-        history.push("/thankyou");
-
-        // add to firebase
-        firebase
-          .firestore()
-          .collection("orders")
-          .add({
-            order_id: order_id,
-            amount: amount.toString(),
-            buyer: user.uid,
-          })
-          .catch((error) => {
-            alert(error.message);
-          });
-
-        const data = {
-          orderCreationId: order_id,
-          razorpayPaymentId: response.razorpay_payment_id,
-          razorpayOrderId: response.razorpay_order_id,
-          razorpaySignature: response.razorpay_signature,
-        };
-
-        await axios.post(
-          `http://${document.location.hostname}:5000/payment/success`,
-          data
-        );
-
-        // alert(result.data.msg);
-      },
-      prefill: {
-        name: "Name",
-      },
-      notes: {
-        address: "IndiaLore Corporate Office",
-      },
-      theme: {
-        color: "#61dafb",
-      },
-    };
-
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
-  }
-
   return (
     <div>
-      <section id="cart" class="section-p1">
+      <section id="cart" className="section-p1">
         <table width="100%">
           <thead>
             <tr>
@@ -131,12 +33,12 @@ function Checkout() {
           </tbody>
         </table>
       </section>
-      <section id="checkout" class="section-p1">
+      <section id="checkout" className="section-p1">
         <div id="coupon">
           <h3>Add your Coupons</h3>
           <div>
             <input type="text" placeholder="Have Coupon?" />
-            <botton class="normal-button">Apply</botton>
+            <button className="normal-button">Apply</button>
           </div>
         </div>
         <div id="subtotal">
@@ -161,7 +63,9 @@ function Checkout() {
               <strong>{`Rs.${cartTotal + deliveryCharge}`}</strong>
             </td>
           </table>
-          <button class="normal-button" onClick={displayRazorpay}>
+          <button className="normal-button" onClick={()=>{
+            history.push("/checkoutdetails")
+          }}>
             Checkout
           </button>
         </div>
