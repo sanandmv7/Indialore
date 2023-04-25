@@ -82,6 +82,10 @@ export const CartProvider = ({ children }) => {
     setCartItems(clearCartItem(cartItems, cartItemToClear));
   };
 
+  const resetCart = ()=>{
+    setCartItems([]);
+  }
+
   const value = {
     isCartOpen,
     setIsCartOpen,
@@ -89,6 +93,7 @@ export const CartProvider = ({ children }) => {
     addItemToCart,
     removeItemFromCart,
     clearItemFromCart,
+    resetCart,
     cartItemCount,
     cartTotal
   };

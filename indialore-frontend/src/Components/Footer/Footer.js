@@ -32,7 +32,7 @@ function Footer() {
 
       <div className="col">
         <h4>Customer Care</h4>
-        <p><strong>Timing:</strong> 10 AM - 6 PM (Mon - Fri)</p>
+        <p><strong>Timing:</strong> 24x7 Available</p>
         <p><strong>Call:</strong> 8888 0909 1234</p>
       </div>
 

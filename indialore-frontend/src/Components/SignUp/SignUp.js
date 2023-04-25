@@ -27,6 +27,7 @@ function SignUp({ switchToLogin }) {
     e.preventDefault();
     // console.log("Submitting credentials");
     // console.log("Signup submitted with email: ", email, " and password: ", password);
+    
     if(password === confirmPassword){
       firebase.auth().createUserWithEmailAndPassword(email, password).then(
         (result)=>{

@@ -13,11 +13,12 @@ function Header() {
   const { user } = useContext(AuthContext);
   const { firebase } = useContext(FirebaseContext);
   const history = useHistory();
-  const { isCartOpen } = useContext(CartContext);
+  const { isCartOpen, resetCart } = useContext(CartContext);
   const { searchString, setSearchString } = useContext(SearchContext);
   
 
   const handleLogOut = () => {
+    resetCart();
     firebase.auth().signOut();
     history.push("/");
   };
