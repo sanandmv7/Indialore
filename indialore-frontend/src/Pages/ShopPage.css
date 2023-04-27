@@ -74,11 +74,25 @@
   height: 40px;
   line-height: 40px;
   border-radius: 50px;
-  background-color: #e8f6ea;
   font-weight: 500;
   color: #088178;
-  border: 1px solid #cce7d0;
   position: absolute;
   bottom: 20px;
   right: 10px;
+}
+
+#product1 .pro .wish {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50px;
+  font-weight: 500;
+  color: #e71b1b;
+  position: absolute;
+  bottom: 20px;
+  right: 40px;
+}
+
+.pro .a{
+  display: flex;
 }

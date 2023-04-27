@@ -34,31 +34,36 @@ contract IndialoreMarketplace {
         _;
     }
 
-    constructor() {
-        paymentToken = new IndialorePaymentToken();
-        escrow = new Escrow(address(paymentToken));
+    event SellerRegistered(address seller, uint timestamp);
+    event StoreCreated(string storeId, address seller, uint timestamp);
+
+    constructor(address _paymentTokenAddress) {
+        paymentToken = IndialorePaymentToken(_paymentTokenAddress);
+        escrow = new Escrow(_paymentTokenAddress);
     }
 
     // Function to register a seller
     function registerSeller() external {
         // Mark the caller's address as a seller
         isSeller[msg.sender] = true;
+        emit SellerRegistered(msg.sender, block.timestamp);
     }
 
     // Function to create a new store for the caller
-    function createStore(string memory _storeName) external onlySellers {
+    function createStore(string memory _storeName) external onlySellers returns(string memory _storeId) {
         // Ensure that the seller doesn't already have a store
         require(
             address(sellerToStore[msg.sender]) == address(0),
             "Only one store per seller is allowed"
         );
         // Generate a unique store ID based on the current store ID counter
-        string memory _storeId = string.concat("IL", currentStoreId.toString());
+        _storeId = string.concat("IL", currentStoreId.toString());
         // Create a new Store contract with the given name and store ID
         Store store = new Store(_storeName, _storeId, address(escrow));
         // Associate the new Store contract with the seller's address
         sellerToStore[msg.sender] = store;
         // Increment the store ID counter
         currentStoreId++;
+        emit StoreCreated(_storeId, msg.sender, block.timestamp);
     }
 }

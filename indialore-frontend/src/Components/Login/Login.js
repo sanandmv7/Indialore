@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { FirebaseContext } from '../../contexts/UserContext'
 import { useHistory } from "react-router-dom";
+import ConnectWalletButton from "../ConnectWalletButton/ConnectWalletButton";
 // import './Login.css';
 
 function Login({ switchToSignup }) {
@@ -38,6 +39,7 @@ function Login({ switchToSignup }) {
       <div className="pass-link">
         <a href="/login">Forgot password?</a>
       </div>
+      <ConnectWalletButton />
       <div className="field">
         <input type="submit" value="Login" />
       </div>

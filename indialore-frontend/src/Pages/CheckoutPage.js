@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Checkout from "../Components/Checkout/Checkout";
 import Footer from "../Components/Footer/Footer";
 import Header from "../Components/Header/Header";
 
 function CheckoutPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <Header />

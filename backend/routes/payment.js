@@ -1,10 +1,14 @@
 require("dotenv").config();
 const express = require("express");
 const Razorpay = require("razorpay");
+const crypto = require("crypto");
+const { ethers } = require("ethers");
 
 const router = express.Router();
+const contract = require("../artifacts/contracts/IndialorePaymentToken.sol/IndialorePaymentToken.json");
 
 router.post("/orders", async (req, res) => {
+  console.log("orders");
   const { amount } = req.body;
   // console.log(`cartTotal = ${cartTotal}`);
 
@@ -31,6 +35,7 @@ router.post("/orders", async (req, res) => {
 });
 
 router.post("/success", async (req, res) => {
+  console.log("success1");
   try {
     // getting the details back from our font-end
     const {
@@ -61,7 +66,62 @@ router.post("/success", async (req, res) => {
       orderId: razorpayOrderId,
       paymentId: razorpayPaymentId,
     });
+    console.log("success2");
   } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+});
+
+router.post("/mint", async (req, res) => {
+  try {
+    const instance = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_SECRET,
+    });
+
+    // getting the details back from our font-end
+    const { razorpayPaymentId, to, amount } = req.body;
+
+    const paymentDetails = await instance.payments.fetch(razorpayPaymentId);
+    // console.log(paymentDetails)
+    // TODO: Also check if tokens are already issued
+
+    if (paymentDetails["status"] === "captured") {
+      console.log(`to: ${to}`);
+      console.log(`amount: ${amount}`);
+
+      // Provider
+      const alchemyProvider = new ethers.AlchemyProvider(
+        (network = "sepolia"),
+        process.env.API_KEY
+      );
+
+      // Signer
+      const signer = new ethers.Wallet(
+        process.env.PRIVATE_KEY,
+        alchemyProvider
+      );
+
+      // Contract
+      const iptContract = new ethers.Contract(
+        process.env.IPT_ADDRESS,
+        contract.abi,
+        alchemyProvider
+      );
+
+      const tx = await iptContract.connect(signer).mint(to, amount);
+      await tx.wait(6);
+
+      res.json({
+        msg: "success",
+        paymentId: razorpayPaymentId,
+      });
+    } else {
+      return res.status(400).json({ msg: "Transaction not legit!" });
+    }
+  } catch (error) {
+    console.log(error);
     res.status(500).send(error);
   }
 });

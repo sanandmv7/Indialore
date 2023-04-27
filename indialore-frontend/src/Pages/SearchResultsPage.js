@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Footer from "../Components/Footer/Footer";
 import Header from "../Components/Header/Header";
 import Newsletter from "../Components/Newsletter/Newsletter";
@@ -11,6 +11,10 @@ import "./ShopPage.css";
 function SearchResultsPage() {
   const { products } = useContext(ProductsContext);
   const { searchString } = useContext(SearchContext);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div>

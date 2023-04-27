@@ -1,0 +1,29 @@
+.connect_wallet_button {
+    padding: 9px 16px;
+    max-height: 40px;
+    *box-shadow: 4px 4px 15px 0 rgb(0 0 0 / 20%);
+    border-color: #254cdd;
+    border: none;
+    background: none;
+    color: white;
+    background-color: #254cdd;
+    border-radius: 6px;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    min-width: 160px;
+    margin-top: 70px;
+    font-family: Rubik, sans-serif;
+  }
+  
+  #walletButton {
+    padding: 9px 16px;
+    background-color: white;
+    border: 2px solid #254cdd;
+    color: #254cdd;
+    width: 100%;
+    margin-top: 4%;
+  }

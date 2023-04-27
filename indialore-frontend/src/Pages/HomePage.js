@@ -10,11 +10,34 @@ import "./HomePage.css";
 import Newsletter from "../Components/Newsletter/Newsletter";
 import { FirebaseContext } from "../contexts/UserContext";
 
+import { Web3Context } from "../contexts/Web3Context";
+
 function HomePage(props) {
   const { firebase } = useContext(FirebaseContext);
   const [categories, setCategories] = useState([]);
+  const { setCurrentAccount } = useContext(Web3Context);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+    
+    async function connectWallet() {
+      const { ethereum } = window;
+
+    if (!ethereum) {
+      alert("Please install Metamask!");
+    }
+
+    try {
+      const accounts = await ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      console.log("Account found! Address: ", accounts[0]);
+      setCurrentAccount(accounts[0]);
+    } catch (err) {
+      console.log(err);
+    }
+    }
+
     firebase
       .firestore()
       .collection("Category")
@@ -28,7 +51,9 @@ function HomePage(props) {
         });
         setCategories(allCats);
       });
-  }, [firebase]);
+
+      connectWallet();
+  }, [firebase, setCurrentAccount]);
 
   return (
     <div className="homePageContainer">

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Footer from "../Components/Footer/Footer";
 import Header from "../Components/Header/Header";
 import Newsletter from "../Components/Newsletter/Newsletter";
@@ -11,6 +11,10 @@ import { CategoryContext } from "../contexts/CategoryContext";
 function CategoryPage() {
   const { products } = useContext(ProductsContext);
   const { selectedCategory } = useContext(CategoryContext);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div>
@@ -48,6 +52,7 @@ function CategoryPage() {
                   .includes(selectedCategory.toLowerCase());
               } catch (e) {
                 console.log(e);
+                return false;
               }
             })
             .map((fp) => (

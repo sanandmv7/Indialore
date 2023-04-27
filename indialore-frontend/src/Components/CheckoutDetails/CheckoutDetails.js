@@ -9,14 +9,20 @@ import logo from "../../assets/logo.svg";
 import { useHistory } from "react-router-dom";
 import { AuthContext, FirebaseContext } from "../../contexts/UserContext";
 
+import env from "react-dotenv";
+import { PaymentContext } from "../../contexts/PaymentContext";
+import { Web3Context } from "../../contexts/Web3Context";
+import { OrderContext } from "../../contexts/OrderContext";
+
 function CheckoutDetails() {
-  const { cartItems, setCartItems, cartTotal } = useContext(CartContext);
-  const [deliveryCharge] = useState(49);
+  const { cartItems, resetCart, cartTotal } = useContext(CartContext);
+  const [deliveryCharge] = useState(0);
 
   const history = useHistory();
 
   const { firebase } = useContext(FirebaseContext);
   const { user } = useContext(AuthContext);
+  const { currentAccount } = useContext(Web3Context);
 
   const [bFname, setBFname] = useState("");
   const [bLname, setBLname] = useState("");
@@ -37,6 +43,9 @@ function CheckoutDetails() {
   const [sPin, setSPin] = useState("");
   const [sEmail, setSEmail] = useState("");
   const [sContact, setSContact] = useState("");
+
+  const { setPaymentId, setPaymentAmount } = useContext(PaymentContext);
+  const { setOrderDetails } = useContext(OrderContext);
 
   const date = new Date();
 
@@ -127,122 +136,142 @@ function CheckoutDetails() {
   }
 
   async function displayRazorpay() {
-    console.log(document.location.hostname);
+    if (currentAccount !== null) {
+      console.log(document.location.hostname);
 
-    const res = await loadScript(
-      "https://checkout.razorpay.com/v1/checkout.js"
-    );
+      const res = await loadScript(
+        "https://checkout.razorpay.com/v1/checkout.js"
+      );
 
-    if (!res) {
-      alert("Razorpay SDK failed to load. Are you online?");
-      return;
-    }
+      if (!res) {
+        alert("Razorpay SDK failed to load. Are you online?");
+        return;
+      }
 
-    const result = await axios.post(
-      `http://${document.location.hostname}:5000/payment/orders`,
-      { amount: cartTotal + deliveryCharge }, // pass the amount as a parameter
-      { headers: { "Content-Type": "application/json" } }
-    );
+      const result = await axios.post(
+        `http://${document.location.hostname}:5000/payment/orders`,
+        { amount: cartTotal + cartTotal * 0.12 + deliveryCharge }, // pass the amount as a parameter
+        { headers: { "Content-Type": "application/json" } }
+      );
 
-    if (!result) {
-      alert("Server error. Are you online?");
-      return;
-    }
+      if (!result) {
+        alert("Server error. Are you online?");
+        return;
+      }
 
-    const { amount, id: order_id, currency } = result.data;
+      const { amount, id: order_id, currency } = result.data;
 
-    const options = {
-      key: "rzp_test_29uyaVVF7MwK4l", // Enter the Key ID generated from the Dashboard
-      amount: amount.toString(),
-      currency: currency,
-      name: "INDIALORE",
-      description: "Test Transaction",
-      image: { logo },
-      order_id: order_id,
-      handler: async function (response) {
-        // alert("Thank you for your order.");
-        history.push("/thankyou");
+      const options = {
+        key: env.RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
+        amount: amount.toString(),
+        currency: currency,
+        name: "INDIALORE",
+        description: "Test Transaction",
+        image: { logo },
+        order_id: order_id,
+        handler: async function (response) {
+          // alert("Thank you for your order.");
+          history.push("/minting");
 
-        // add to firebase
-        firebase
-          .firestore()
-          .collection("orders")
-          .add({
-            order_id: order_id,
-            amount: amount.toString(),
-            buyer: user.uid,
-            billingAddress:
-              bFname +
-              " " +
-              bLname +
-              ", " +
-              bHouse +
-              ", " +
-              bSAddress +
-              ", " +
-              bCity +
-              ", " +
-              bState +
-              "-" +
-              bPin +
-              ", email: " +
-              bEmail +
-              ", phone: " +
-              bContact,
-            shippingAddress:
-              sFname +
-              " " +
-              sLname +
-              ", " +
-              sHouse +
-              ", " +
-              sSAddress +
-              ", " +
-              sCity +
-              ", " +
-              sState +
-              "-" +
-              sPin +
-              ", email: " +
-              sEmail +
-              ", phone: " +
-              sContact,
-            cartItems: cartItems,
-            createdAt: date.getTime(),
-          })
-          .catch((error) => {
-            alert(error.message);
+          setPaymentId(response.razorpay_payment_id);
+          setPaymentAmount(amount.toString());
+
+          // add to firebase
+          firebase
+            .firestore()
+            .collection("orders")
+            .add({
+              order_id: order_id,
+              payment_id: response.razorpay_payment_id,
+              amount: amount.toString(),
+              buyer: user.uid,
+              billingAddress:
+                bFname +
+                " " +
+                bLname +
+                ", " +
+                bHouse +
+                ", " +
+                bSAddress +
+                ", " +
+                bCity +
+                ", " +
+                bState +
+                "-" +
+                bPin +
+                ", email: " +
+                bEmail +
+                ", phone: " +
+                bContact,
+              shippingAddress:
+                sFname +
+                " " +
+                sLname +
+                ", " +
+                sHouse +
+                ", " +
+                sSAddress +
+                ", " +
+                sCity +
+                ", " +
+                sState +
+                "-" +
+                sPin +
+                ", email: " +
+                sEmail +
+                ", phone: " +
+                sContact,
+              cartItems: cartItems,
+              createdAt: date.getTime(),
+            })
+            .catch((error) => {
+              alert(error.message);
+            });
+
+          setOrderDetails({
+            username: `${bFname} ${bLname}`,
+            useremail: `${bEmail}`,
+            userzip: `${bPin}`,
+            usercity: `${bCity}`,
+            usercountry: `India`,
+            _id: order_id,
+            products: cartItems,
           });
 
-        setCartItems([]);
+          resetCart();
 
-        const data = {
-          orderCreationId: order_id,
-          razorpayPaymentId: response.razorpay_payment_id,
-          razorpayOrderId: response.razorpay_order_id,
-          razorpaySignature: response.razorpay_signature,
-        };
+          const data = {
+            orderCreationId: order_id,
+            razorpayPaymentId: response.razorpay_payment_id,
+            razorpayOrderId: response.razorpay_order_id,
+            razorpaySignature: response.razorpay_signature,
+            // to: currentAccount,
+            // amount: amount.toString()
+          };
 
-        await axios.post(
-          `http://${document.location.hostname}:5000/payment/success`,
-          data
-        );
+          await axios.post(
+            `http://${document.location.hostname}:5000/payment/success`,
+            data
+          );
 
-        // alert(result.data.msg);
-      },
-      prefill: {
-        name: "Name",
-      },
-      notes: {
-        address: "IndiaLore Corporate Office",
-      },
-      theme: {
-        color: "#61dafb",
-      },
-    };
+          // alert(result.data.msg);
+        },
+        prefill: {
+          name: "Name",
+        },
+        notes: {
+          address: "IndiaLore Corporate Office",
+        },
+        theme: {
+          color: "#61dafb",
+        },
+      };
 
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
+    } else {
+      alert("Please connect your wallet first");
+    }
   }
 
   return (

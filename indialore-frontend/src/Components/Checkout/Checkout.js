@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 
 function Checkout() {
   const { cartItems, cartTotal } = useContext(CartContext);
-  const [deliveryCharge] = useState(49);
+  const [deliveryCharge] = useState(0);
 
   const history = useHistory();
 
@@ -49,7 +49,7 @@ function Checkout() {
               <td>{`Rs.${cartTotal}`}</td>
             </tr>
             <tr>
-              <td>GST (incl. in price)</td>
+              <td>GST 12%</td>
               <td>Rs.{cartTotal * 0.12}</td>
             </tr>
             <tr>
@@ -60,12 +60,17 @@ function Checkout() {
               <strong>Total</strong>
             </td>
             <td>
-              <strong>{`Rs.${cartTotal + deliveryCharge}`}</strong>
+              <strong>{`Rs.${
+                cartTotal + cartTotal * 0.12 + deliveryCharge
+              }`}</strong>
             </td>
           </table>
-          <button className="normal-button" onClick={()=>{
-            history.push("/checkoutdetails")
-          }}>
+          <button
+            className="normal-button"
+            onClick={() => {
+              history.push("/checkoutdetails");
+            }}
+          >
             Checkout
           </button>
         </div>

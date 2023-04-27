@@ -1,8 +1,10 @@
 import {React, useState, useContext} from "react";
 import { FirebaseContext } from "../../contexts/UserContext";
 import { useHistory } from "react-router-dom";
+import ConnectWalletButton from "../ConnectWalletButton/ConnectWalletButton";
 
 import './SignUp.css';
+import { Web3Context } from "../../contexts/Web3Context";
 
 function SignUp({ switchToLogin }) {
   const history = useHistory();
@@ -10,6 +12,7 @@ function SignUp({ switchToLogin }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const {firebase} = useContext(FirebaseContext);
+  const {currentAccount} = useContext(Web3Context);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -34,7 +37,8 @@ function SignUp({ switchToLogin }) {
           // console.log("Got result");
           firebase.firestore().collection('users').add({
             id: result.user.uid,
-            email: email
+            email: email,
+            wallet: currentAccount
           }).then(
             ()=>{
               // console.log("Pushing history");
@@ -51,7 +55,7 @@ function SignUp({ switchToLogin }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="signup">
+    <form className="signup">
       <div className="field">
         <input type="text" placeholder="Email address" value={email} onChange={handleEmailChange} required />
       </div>
@@ -64,7 +68,8 @@ function SignUp({ switchToLogin }) {
       {/* <div className="field">
         <input type="submit" value="Connect Wallet" required />
       </div> */}
-      <div className="field submit-btn">
+      <ConnectWalletButton />
+      <div className="field submit-btn" onClick={handleSubmit}>
         <input type="submit" value="Register" />
       </div>
       <div className="signup-link">

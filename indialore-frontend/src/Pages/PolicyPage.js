@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../Components/Header/Header";
 import Newsletter from "../Components/Newsletter/Newsletter";
 import Footer from "../Components/Footer/Footer";
@@ -6,6 +6,10 @@ import Footer from "../Components/Footer/Footer";
 import "./styles.css";
 
 function PolicyPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <Header />
