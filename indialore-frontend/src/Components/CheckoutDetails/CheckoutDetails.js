@@ -193,7 +193,7 @@ function CheckoutDetails() {
         order_id: order_id,
         handler: async function (response) {
           // alert("Thank you for your order.");
-          history.push("/minting");
+          history.push("/processing");
 
           setPaymentId(response.razorpay_payment_id);
           setPaymentAmount(amount.toString());

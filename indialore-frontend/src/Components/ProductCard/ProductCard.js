@@ -9,25 +9,28 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { AuthContext } from "../../contexts/UserContext";
 import { WishlistContext } from "../../contexts/WishlistContext";
 
+import "./ProductCard.css";
+
 function ProductCard({ product }) {
-  const { img_url, name, price, state } = product;
+  const { img_url, name, price, state, quantity } = product;
   const { addItemToCart } = useContext(CartContext);
-  const { addItemToWishlist, removeItemFromWishlist } = useContext(WishlistContext);
+  const { addItemToWishlist, removeItemFromWishlist } =
+    useContext(WishlistContext);
   const { setProductDetails } = useContext(PostContext);
   const history = useHistory();
-  const [ wishClicked, setWishClicked ] = useState(false);
+  const [wishClicked, setWishClicked] = useState(false);
   const { user } = useContext(AuthContext);
 
   const addProductToCart = () => {
-    if(user) {
-      addItemToCart(product); 
+    if (user) {
+      addItemToCart(product);
     } else {
       alert("Please login/signup first");
     }
-  }
+  };
 
   const addProductToWishlist = () => {
-    if(!wishClicked){
+    if (!wishClicked) {
       addItemToWishlist(product);
     } else {
       removeItemFromWishlist(product);
@@ -36,7 +39,8 @@ function ProductCard({ product }) {
   };
 
   return (
-    <div className="pro">
+    <div className={quantity <= 0 ? "pro disabledPro" : "pro"}>
+      {quantity<=0?<p className="soldout-text">Sold Out!</p>:""}
       <div
         onClick={() => {
           setProductDetails(product);
@@ -57,19 +61,28 @@ function ProductCard({ product }) {
           <h4>{`Rs.${price}`}</h4>
         </div>
       </div>
-      <span className="a">
-        <span
-          className="material-icons-sharp wish"
-          onClick={addProductToWishlist}
-        >
-          {wishClicked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-        </span>
-      </span>
-      <span className="a">
-        <span className="material-icons-sharp cart" onClick={addProductToCart}>
-          <ShoppingCartSharpIcon />
-        </span>
-      </span>
+      {quantity <= 0 ? (
+        ""
+      ) : (
+        <div>
+          <span className="a">
+            <span
+              className="material-icons-sharp wish"
+              onClick={addProductToWishlist}
+            >
+              {wishClicked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+            </span>
+          </span>
+          <span className="a">
+            <span
+              className="material-icons-sharp cart"
+              onClick={addProductToCart}
+            >
+              <ShoppingCartSharpIcon />
+            </span>
+          </span>
+        </div>
+      )}
     </div>
   );
 }

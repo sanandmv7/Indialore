@@ -89,7 +89,7 @@ function App() {
                   <Route path="/checkoutdetails">
                     <CheckoutDetailsPage />
                   </Route>
-                  <Route path="/minting">
+                  <Route path="/processing">
                     <MintingPage />
                   </Route>
                   <Route path="/thankyou">
