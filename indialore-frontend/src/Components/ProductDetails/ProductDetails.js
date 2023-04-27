@@ -29,6 +29,7 @@ function ProductDetails() {
         <h6>Home / {productDetails.state}</h6>
         <h4>{productDetails.name}</h4>
         <h2>Rs.{productDetails.price}</h2>
+        {productDetails.quantity<10?<h6 className="red">Hurry, only few items left!</h6>:""}
         <select>
           <option>Select Size</option>
           <option>Free Size</option>

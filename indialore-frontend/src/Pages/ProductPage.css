@@ -52,6 +52,11 @@
   #pro-details .single-pro-details button{
     border-radius: 3px;
     border: none;
+    margin-bottom: 5%;
+  }
+
+  .red {
+    color: red;
   }
   
   #pro-details .single-pro-details span{

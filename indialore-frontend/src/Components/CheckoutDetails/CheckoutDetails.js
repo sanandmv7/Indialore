@@ -121,6 +121,28 @@ function CheckoutDetails() {
     setSContact(e.target.value);
   };
 
+  function updateProductQuantities(items) {
+    items.forEach((item) => {
+      console.log(item.docId);
+      var docRef = firebase.firestore().collection("Products").doc(item.docId);
+
+      docRef
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            console.log("Document data:", doc.data().quantity-item.quantity);
+            firebase.firestore().collection("Products").doc(item.docId).update({quantity: doc.data().quantity-item.quantity});
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        })
+        .catch((error) => {
+          console.log("Error getting document:", error);
+        });
+    });
+  }
+
   function loadScript(src) {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -237,6 +259,8 @@ function CheckoutDetails() {
             _id: order_id,
             products: cartItems,
           });
+
+          updateProductQuantities(cartItems);
 
           resetCart();
 
@@ -435,7 +459,7 @@ function CheckoutDetails() {
           <div className="accordion-header">Payment</div>
           <div className="accordion-content-pay">
             {/* <img src="https://badges.razorpay.com/badge-dark.png " alt="" /> */}
-            <p>Rs.{cartTotal + deliveryCharge}</p>
+            <p>Rs.{cartTotal + cartTotal * 0.12 + deliveryCharge}</p>
             <button
               className="normal-button"
               id="check-btn"

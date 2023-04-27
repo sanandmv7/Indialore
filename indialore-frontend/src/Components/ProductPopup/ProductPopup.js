@@ -71,9 +71,15 @@ function ProductPopup({ handleClose, show }) {
               quantity: quantity,
               size: size,
               seller: user.uid,
-              createdAt: date.toDateString()
+              createdAt: date.toDateString(),
             })
-            .then(() => {
+            .then((docRef) => {
+              firebase
+                .firestore()
+                .collection("Products")
+                .doc(docRef.id)
+                .update({ docId: docRef.id });
+
               setResponse("Product added successfully");
               setName("");
               setDesc("");
