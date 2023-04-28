@@ -9,31 +9,41 @@ import PersonSharpIcon from "@mui/icons-material/PersonSharp";
 import AddSharpIcon from "@mui/icons-material/AddSharp";
 
 import "./DashboardRight.css";
+import AddStorePopup from "../AddStorePopup/AddStorePopup";
 
 function DashboardRight() {
-  const [isShowModal, setIsShowModal] = useState(false);
+  const [isShowProductModal, setIsShowProductModal] = useState(false);
+  const [isShowStoreModal, setIsShowStoreModal] = useState(false);
 
-  const showModal = () => {
-    setIsShowModal(true);
+  const showProductModal = () => {
+    setIsShowProductModal(true);
   };
 
-  const hideModal = () => {
-    setIsShowModal(false);
+  const hideProductModal = () => {
+    setIsShowProductModal(false);
+  };
+
+  const showStoreModal = () => {
+    setIsShowStoreModal(true);
+  };
+
+  const hideStoreModal = () => {
+    setIsShowStoreModal(false);
   };
 
   const recents = [
-    {
-      id: 1,
-      name: "Sumer",
-      item: "Kolhapuri Chappal",
-      time: "2 minutes",
-    },
-    {
-      id: 2,
-      name: "Sanand",
-      item: "Chikankari Kurta",
-      time: "3 minutes",
-    },
+    // {
+    //   id: 1,
+    //   name: "Sumer",
+    //   item: "Kolhapuri Chappal",
+    //   time: "2 minutes",
+    // },
+    // {
+    //   id: 2,
+    //   name: "Sanand",
+    //   item: "Chikankari Kurta",
+    //   time: "3 minutes",
+    // },
   ];
 
   return (
@@ -49,7 +59,7 @@ function DashboardRight() {
             <p>
               Hello, <b>Seller</b>
             </p>
-            <small className="text-muted">Admin</small>
+            {/* <small className="text-muted">Admin</small> */}
           </div>
           <div className="profile-photo">
             <span>
@@ -69,21 +79,22 @@ function DashboardRight() {
       </div>
       {/*======================END OF RECENT UPDATES======================*/}
       <div className="add-btn">
-        <div className="item_add-store">
+        <div className="item_add-store" onClick={showStoreModal}>
           <span>
             <AddSharpIcon />
           </span>
           <h3>Add a Store</h3>
         </div>
 
-        <div className="item_add-store" onClick={showModal}>
+        <div className="item_add-store" onClick={showProductModal}>
           <span>
             <AddSharpIcon />
           </span>
           <h3>Add a Product</h3>
         </div>
       </div>
-      <ProductPopup show={isShowModal} handleClose={hideModal} />
+      <ProductPopup show={isShowProductModal} handleClose={hideProductModal} />
+      <AddStorePopup show={isShowStoreModal} handleClose={hideStoreModal} />
       {/*===================END OF RIGHT BUTTON===========================*/}
     </div>
   );

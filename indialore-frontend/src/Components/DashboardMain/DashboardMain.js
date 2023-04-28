@@ -20,7 +20,7 @@ function DashboardMain() {
             <div className="middle">
               <div className="left">
                 <h3>Total Sales</h3>
-                <h2>&#8377;25000</h2>
+                <h2>&#8377;0</h2>
               </div>
               {/* <div className="progress">
                 <svg>
@@ -28,7 +28,7 @@ function DashboardMain() {
                 </svg>
               </div> */}
             </div>
-            <small className="text-muted">Last 24 Hours</small>
+            {/* <small className="text-muted">Last 24 Hours</small> */}
           </div>
 
           <div className="store_no">
@@ -36,7 +36,7 @@ function DashboardMain() {
             <div className="middle">
               <div className="left">
                 <h3>Stores</h3>
-                <h2>3</h2>
+                <h2>0</h2>
               </div>
               {/* <div className="progress">
                 <svg>
@@ -44,7 +44,7 @@ function DashboardMain() {
                 </svg>
               </div> */}
             </div>
-            <small className="text-muted">Last 24 Hours</small>
+            {/* <small className="text-muted">Last 24 Hours</small> */}
           </div>
 
           <div className="sales">
@@ -52,7 +52,7 @@ function DashboardMain() {
             <div className="middle">
               <div className="left">
                 <h3>Pending Orders</h3>
-                <h2>&#8377;5000</h2>
+                <h2>&#8377;0</h2>
               </div>
               {/* <div className="progress">
                 <svg>
@@ -60,7 +60,7 @@ function DashboardMain() {
                 </svg>
               </div> */}
             </div>
-            <small className="text-muted">Last 24 Hours</small>
+            {/* <small className="text-muted">Last 24 Hours</small> */}
           </div>
         </div>
         {/* END OF INSIGHTS SECTION */}

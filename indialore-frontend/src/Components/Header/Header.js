@@ -6,6 +6,7 @@ import CartIcon from "../CartIcon/CartIcon";
 import CartDropdown from "../CartDropdown/CartDropdown";
 import { CartContext } from "../../contexts/CartContext";
 import { SearchContext } from "../../contexts/SearchContext";
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 import "./Header.css";
 
@@ -30,6 +31,10 @@ function Header() {
   const handleSearch = () => {
     history.push("/search");
   };
+
+  const handleDashboard = () => {
+    history.push("/dashboard");
+  }
 
   return (
     <Fragment>
@@ -69,6 +74,7 @@ function Header() {
               </Link>
             )}
             {user && <CartIcon className="link" />}
+            {user && <DashboardIcon onClick={handleDashboard} className="dash" />}
           </ul>
           {isCartOpen && <CartDropdown />}
         </div>

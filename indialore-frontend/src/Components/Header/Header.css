@@ -58,7 +58,7 @@
   content: "";
   width: 23%;
   height: 2px;
-  background: orangered;
+  background: #ff4500;
   position: absolute;
   bottom: -4px;
   left: 20px;
@@ -93,4 +93,9 @@
 #searchbar button:hover{
   cursor: pointer;
   background-color: orangered;
+}
+
+.dash:hover {
+  cursor: pointer;
+  color: orangered;
 }

@@ -19,23 +19,23 @@ function HomePage(props) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    
+
     async function connectWallet() {
       const { ethereum } = window;
 
-    if (!ethereum) {
-      alert("Please install Metamask!");
-    }
+      if (!ethereum) {
+        alert("Please install Metamask!");
+      }
 
-    try {
-      const accounts = await ethereum.request({
-        method: "eth_requestAccounts",
-      });
-      console.log("Account found! Address: ", accounts[0]);
-      setCurrentAccount(accounts[0]);
-    } catch (err) {
-      console.log(err);
-    }
+      try {
+        const accounts = await ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        console.log("Account found! Address: ", accounts[0]);
+        setCurrentAccount(accounts[0]);
+      } catch (err) {
+        console.log(err);
+      }
     }
 
     firebase
@@ -52,7 +52,7 @@ function HomePage(props) {
         setCategories(allCats);
       });
 
-      connectWallet();
+    connectWallet();
   }, [firebase, setCurrentAccount]);
 
   return (
