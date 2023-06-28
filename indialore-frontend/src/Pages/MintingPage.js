@@ -71,7 +71,7 @@ function MintingPage() {
 
           let txn = await iptContract.approve(
             env.ESCROW_ADDRESS,
-            ethers.utils.parseEther(paymentAmount)
+            paymentAmount
           );
           await txn.wait(2);
         } else {

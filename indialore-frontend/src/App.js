@@ -28,6 +28,7 @@ import CheckoutDetailsPage from "./Pages/CheckoutDetailsPage";
 import { PaymentProvider } from "./contexts/PaymentContext";
 import MintingPage from "./Pages/MintingPage";
 import { OrderProvider } from "./contexts/OrderContext";
+import StoreDashboard from "./Pages/StoreDashboard";
 
 function App() {
   const { setUser } = useContext(AuthContext);
@@ -103,6 +104,9 @@ function App() {
                   </Route>
                   <Route path="/dashboard-products">
                     <ProductDashboard />
+                  </Route>
+                  <Route path="/store">
+                    <StoreDashboard />
                   </Route>
                   <Route path="/tnc">
                     <TncPage />

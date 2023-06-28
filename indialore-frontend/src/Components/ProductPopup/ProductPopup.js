@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useContext, useState } from "react";
 
 import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import { FirebaseContext, AuthContext } from "../../contexts/UserContext";
+
+import env from "react-dotenv";
+import { Web3Context } from "../../contexts/Web3Context";
+
+const StoreContract = require("../../artifacts/contracts/Store.sol/Store.json");
+const StoreContractAbi = StoreContract.abi;
 
 function ProductPopup({ handleClose, show }) {
   const showHideClassName = show ? "popup1 active" : "popup1";
@@ -13,14 +19,36 @@ function ProductPopup({ handleClose, show }) {
   const [image, setImage] = useState(null);
   const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(0);
+  const [tokenId, setTokenId] = useState(0);
   const [size, setSize] = useState("");
 
   const [response, setResponse] = useState("");
 
   const { firebase } = useContext(FirebaseContext);
   const { user } = useContext(AuthContext);
+  const { currentAccount } = useContext(Web3Context);
+
+  const [categories, setCategories] = useState([]);
+
+  const { ethers } = require("ethers");
 
   const date = new Date();
+
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection("Category")
+      .get()
+      .then((snapshot) => {
+        const allCats = snapshot.docs.map((category) => {
+          return {
+            ...category.data(),
+            id: category.id,
+          };
+        });
+        setCategories(allCats);
+      });
+  }, [firebase]);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -46,9 +74,43 @@ function ProductPopup({ handleClose, show }) {
     setPrice(e.target.value);
   };
 
+  const handleTokenIdChange = (e) => {
+    setTokenId(e.target.value);
+  };
+
   const handleSizeChange = (e) => {
     setSize(e.target.value);
   };
+
+  async function addProduct(imgUri) {
+    try {
+      const { ethereum } = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const storeContract = new ethers.Contract(
+          env.STORE_ADDRESS,
+          StoreContractAbi,
+          signer
+        );
+
+        let txn = await storeContract.listProductForSale(
+          currentAccount,
+          tokenId,
+          name,
+          price,
+          quantity,
+          imgUri
+        );
+        await txn.wait(2);
+      } else {
+        console.log("Ethereum object doesn't exist");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,11 +121,14 @@ function ProductPopup({ handleClose, show }) {
       .put(image)
       .then(({ ref }) => {
         ref.getDownloadURL().then((url) => {
+          addProduct(url);
+
           firebase
             .firestore()
             .collection("Products")
             .add({
               name: name,
+              tokenId: tokenId,
               description: desc,
               state: category,
               img_url: url,
@@ -119,6 +184,16 @@ function ProductPopup({ handleClose, show }) {
           />
         </div>
         <div className="product-form-element">
+          <label htmlFor="token-id">TokenId</label>
+          <input
+            type="number"
+            id="token-id"
+            placeholder="Enter Token Id For Product"
+            value={tokenId}
+            onChange={handleTokenIdChange}
+          />
+        </div>
+        <div className="product-form-element">
           <label htmlFor="prod-desc">Product Description</label>
           <input
             type="text"
@@ -146,20 +221,11 @@ function ProductPopup({ handleClose, show }) {
             <option value="" disabled selected hidden>
               ---Select State---
             </option>
-            <option value="Andhra Pradesh">Andhra Pradesh</option>
-            <option value="Assam">Assam</option>
-            <option value="Bihar">Bihar</option>
-            <option value="Himachal">Himachal</option>
-            <option value="Kashmir">Kashmir</option>
-            <option value="Kerala">Kerala</option>
-            <option value="Maharashtra">Maharashtra</option>
-            <option value="Meghalaya">Meghalaya</option>
-            <option value="Mizoram">Mizoram</option>
-            <option value="Odisha">Odisha</option>
-            <option value="Punjab">Punjab</option>
-            <option value="Rajasthan">Rajasthan</option>
-            <option value="Uttar Pradesh">Uttar Pradesh</option>
-            <option value="West Bengal">West Bengal</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.name}>
+                {category.name}
+              </option>
+            ))}
           </select>
         </div>
         <div className="product-form-element">

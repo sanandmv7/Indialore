@@ -11,7 +11,7 @@ function ProductDetails() {
   return (
     <section id="pro-details" className="section-p1">
       <div className="single-pro-image">
-        <img src={productDetails.img_url} width="100%" id="main-image" alt="" />
+        <img src={productDetails.img_url} id="main-image" alt="" />
         {/* <div className="small-image-group">
           <div className="small-image-col">
             <img src="../assets/kalamkari.jpg" width="100%" className="small-image" alt="" />

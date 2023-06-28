@@ -4,9 +4,9 @@ import MenuSharpIcon from "@mui/icons-material/MenuSharp";
 import PersonSharpIcon from "@mui/icons-material/PersonSharp";
 import AddSharpIcon from "@mui/icons-material/AddSharp";
 
-import ProductPopup from "../ProductPopup/ProductPopup";
+import ClaimPopup from "../ClaimPopup/ClaimPopup";
 
-function ProductDashboardRight() {
+function StoreDashboardRight() {
   const [isShowModal, setIsShowModal] = useState(false);
 
   const showModal = () => {
@@ -39,12 +39,12 @@ function ProductDashboardRight() {
           <span>
             <AddSharpIcon />
           </span>
-          <h3>Add a Product</h3>
+          <h3>Claim Tokens</h3>
         </div>
       </div>
-      <ProductPopup show={isShowModal} handleClose={hideModal}/>
+      <ClaimPopup show={isShowModal} handleClose={hideModal}/>
     </div>
   );
 }
 
-export default ProductDashboardRight;
+export default StoreDashboardRight;
